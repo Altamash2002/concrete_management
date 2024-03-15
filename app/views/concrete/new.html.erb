@@ -1,0 +1,213 @@
+<style>
+    .label {
+      font-weight: bold;
+      font-size: 16px;
+    }
+  
+    .inputs input {
+      border: 1px solid black;
+      border-radius: 3px;
+    }
+  
+    .avg {
+      font-weight: bold;
+    }
+  </style>
+  
+  <section class="main-container">
+    <h2 class="my-5 text-center">Add New Concrete Record</h2>
+    <div class="form-container">
+      <%= form_with( method: :post, class: "my-5 px-5 container") do |f| %>
+        <div class="my-2 inputs row justify-content-center">
+          <%= f.label :project, class: "label col-md-2 m-1 text-md-end mx-auto" %>
+          <%= f.text_field :project, class: "col-md-10 mx-auto" %>
+        </div>
+        <div class="my-2 inputs row justify-content-center">
+          <%= f.label :sr_no, class: "label col-md-2 m-1 text-md-end mx-auto" %>
+          <%= f.text_field :sr_no, class: "col-md-10 mx-auto" %>
+        </div>
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :date, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :date, class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :rmc_site_concrete, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :rmc_site_concrete, class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :building, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :building, class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :structure, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :structure, class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :grade, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :grade, class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'w_b_ratio', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'w_b_ratio', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'cement_brand', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'cement_brand', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'cement_c_c_kg_m3', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'cement_c_c_kg_m3', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'s_plasticizer_brand', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'s_plasticizer_brand', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'s_plasticizer_dosage', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'s_plasticizer_dosage', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'m_admixture_brand', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'m_admixture_brand', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'m_admixture_dosage', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'m_admixture_dosage', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'m_silica_brand', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'m_silica_brand', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'m_silica_dosage', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :'m_silica_dosage', class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'03days', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 pe-md-1">
+            <%= f.text_field :'03days_attempt1', class: 'w-100 h-100', placeholder: 'attempt 1' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'03days_attempt2', class: 'w-100 h-100', placeholder: 'attempt 2' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'03days_attempt3', class: 'w-100 h-100', placeholder: 'attempt 3' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'03days_attempt4', class: 'w-100 h-100', placeholder: 'attempt 4' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 ps-md-1">
+            <%= f.text_field :'03days_average', class: 'avg w-100 h-100', placeholder: 'average' %>
+        </div>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'15days', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 pe-md-1">
+            <%= f.text_field :'15days_attempt1', class: 'w-100 h-100', placeholder: 'attempt 1' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'15days_attempt2', class: 'w-100 h-100', placeholder: 'attempt 2' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'15days_attempt3', class: 'w-100 h-100', placeholder: 'attempt 3' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'15days_attempt4', class: 'w-100 h-100', placeholder: 'attempt 4' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 ps-md-1">
+            <%= f.text_field :'15days_average', class: 'avg w-100 h-100', placeholder: 'average' %>
+        </div>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'28days', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 pe-md-1">
+            <%= f.text_field :'28days_attempt1', class: 'w-100 h-100', placeholder: 'attempt 1' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'28days_attempt2', class: 'w-100 h-100', placeholder: 'attempt 2' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'28days_attempt3', class: 'w-100 h-100', placeholder: 'attempt 3' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'28days_attempt4', class: 'w-100 h-100', placeholder: 'attempt 4' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 ps-md-1">
+            <%= f.text_field :'28days_average', class: 'avg w-100 h-100', placeholder: 'average' %>
+        </div>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'35days', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 pe-md-1">
+            <%= f.text_field :'35days_attempt1', class: 'w-100 h-100', placeholder: 'attempt 1' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'35days_attempt2', class: 'w-100 h-100', placeholder: 'attempt 2' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'35days_attempt3', class: 'w-100 h-100', placeholder: 'attempt 3' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'35days_attempt4', class: 'w-100 h-100', placeholder: 'attempt 4' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 ps-md-1">
+            <%= f.text_field :'35days_average', class: 'avg w-100 h-100', placeholder: 'average' %>
+        </div>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'56days', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 pe-md-1">
+            <%= f.text_field :'56days_attempt1', class: 'w-100 h-100', placeholder: 'attempt 1' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'56days_attempt2', class: 'w-100 h-100', placeholder: 'attempt 2' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'56days_attempt3', class: 'w-100 h-100', placeholder: 'attempt 3' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 px-md-1">
+            <%= f.text_field :'56days_attempt4', class: 'w-100 h-100', placeholder: 'attempt 4' %>
+        </div>
+        <div class="col-md-2 m-0 p-0 my-md-0 my-1 ps-md-1">
+            <%= f.text_field :'56days_average', class: 'avg w-100 h-100', placeholder: 'average' %>
+        </div>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'density', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :density, class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-2 inputs row justify-content-center">
+        <%= f.label :'remark', class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :remark, class: 'col-md-10 mx-auto' %>
+        </div>
+
+        <div class="my-5 inputs row justify-content-center">
+          <%= f.submit "Save", class: "col-sm-2 mx-3 col-4 btn btn-success" %>
+          <button class="col-sm-2 mx-3 col-4 btn btn-dark">
+            Cancel
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  

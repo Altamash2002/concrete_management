@@ -1,0 +1,2 @@
+class NumOfCube < ApplicationRecord
+ end

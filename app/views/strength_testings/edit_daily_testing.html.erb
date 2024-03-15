@@ -1,0 +1,186 @@
+<div id="daily_testing"> 
+    <div class="scrollable-container">
+        <h1 class="centered-heading text-center my-4">Daily Testing</h1>
+    </div>
+    <div class="table-content">
+        <div class="overflow-auto mx-1 mx-md-4 p-md-2">
+            <% st = @strength_testing %>
+            <table class="container-fluid table table-responsive bg-white rounded-3 mx-auto" id="table-list" style="box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);">
+                <tr>
+                    <th style="min-width: 260px;">Project</th>
+                    <td style="min-width: 260px;"><%= st&.project_master&.name %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">Sr.No</th>
+                    <td style="min-width: 260px;"><%= st.id %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">Date</th>
+                    <td style="min-width: 260px;"><%= st&.date&.strftime("%d-%m-%Y") %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">RMC/Site Concrete</th>
+                    <td style="min-width: 260px;"><%= st&.rmc_list&.name %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">Building</th>
+                    <td style="min-width: 260px;"><%= st.building_master.present? ? st.building_master.name : "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">Structure</th>
+                    <td style="min-width: 260px;"><%= st&.structure_master&.name || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">Grade</th>
+                    <td style="min-width: 260px;"><%= st&.grade_master&.name || "NA"  %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">W/B Ratio</th>
+                    <td style="min-width: 260px;"><%= st.w_b_ratio || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">Cement Brand</th>
+                    <td style="min-width: 260px;"><%= st&.cement&.brand || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">Cement (C/C kg/M3)</th>
+                    <td style="min-width: 260px;"><%= st&.cement_c_c_kg_m3 || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">S.Plasticizer Brand</th>
+                    <td style="min-width: 260px;"><%= st&.superplasticizer&.brand || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">S.Plasticizer Dosage (%/M3)</th>
+                    <td style="min-width: 260px;"><%= st&.s_plasticizer_dosage || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">M.Admixture Brand</th>
+                    <td style="min-width: 260px;"><%= st&.m_admixture&.brand || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">M.Admixture Dosage (kg/M3)</th>
+                    <td style="min-width: 260px;"><%= st&.m_admixture_dosage || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">3rd Binder Brand</th>
+                    <td style="min-width: 260px;"><%= st&.m_silica&.brand || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th style="min-width: 260px;">3rd Binder Dosage (kg/M3)</th>
+                    <td style="min-width: 260px;"><%= st&.m_silica_dosage || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Density</th>
+                    <td><%= st&.density || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Remark</th>
+                    <td><%= st&.remark || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Update</th>
+                    <td><a class="btn btn-secondary" href="<%= edit_strength_testing_path(id: st&.id, daily_casting: true) %>">Edit Day Casting</a></td>
+                    <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update Day Testing Result</button> </td>
+
+                </tr>
+            </table>
+            <br>
+            
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select a Day</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3 text-center">
+            <% StructureMaster.find_by(name: st&.structure_master&.name)&.acceptance_strengths.each do |testing_day| %>
+              <a href="<%= edit_testing_results_path(id: st&.id, day: testing_day&.title) %>" class="btn btn-primary mb-2"><%= testing_day&.title %></a>
+              <br>
+            <% end %>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

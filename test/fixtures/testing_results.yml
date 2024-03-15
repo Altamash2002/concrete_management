@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slot_type: MyString
+  result_value: 1
+  attempts: 1
+  pass_status: MyString
+
+two:
+  slot_type: MyString
+  result_value: 1
+  attempts: 1
+  pass_status: MyString

@@ -1,0 +1,82 @@
+<style>
+  
+  @media only screen and (min-width:321px) and (max-width:568px) {
+    .s-label {
+      text-align: center !important;
+    }
+
+    .s-label select {
+
+      width: 100% !important;
+    }
+
+    .input {
+
+      width: 100% !important;
+    }
+
+    .text-m {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+</style>
+
+
+<div style="background-color: #F5F5F5; overflow-x: hidden;">
+  <div class="row justify-content-between mx-auto rounded-3 filterBar text-dark text-center pt-3 pb-4" style="background-color: white;">
+    <div class="col-md-3 row mx-auto justify-content-center align-items-center">
+      <div class="col-md-5">
+        <input class="form-check-input" type="checkbox" value="" id="project">
+        <label class="form-check-label fw-semibold" for="project">
+          Project
+        </label>
+      </div>
+      <div class="s-label col-md-7" id="project-input">
+        <%= select_tag "project", options_for_select(@projects), multiple: true, id: "project_filters", class: "select2 rounded w-100", data: { controller: "filter", action: "change->filter#setFilter" } %>
+      </div>
+      
+    </div>
+    <div class="col-md-3 row mx-auto justify-content-center align-items-center">
+      <div class="col-md-5">
+        <input class="form-check-input" type="checkbox" value="" id="building">
+        <label class="form-check-label fw-semibold" for="building">
+          Building
+        </label>
+      </div>
+      <div class="dropdown  s-label col-md-7" id="building-input">
+        <%= select_tag "building", options_for_select(@buildings) , multiple: true, id: 'building_filters' , class: "select2 rounded w-100", data: { controller: "filter", action: "change->filter#setFilter" } %>
+        <%# (as of now i user data column for drop dowm please change ) %>
+      </div>
+    </div>
+
+    <div class="col-md-3 row mx-auto justify-content-center align-items-center">
+      <div class="col-md-5">
+        <input class="form-check-input" type="checkbox" value="" id="grade">
+        <label class="form-check-label fw-semibold" for="grade">
+          Grade
+        </label>
+      </div>
+      <div class="dropdown  s-label col-md-7" id="grade-input">
+        <%= select_tag "grade", options_for_select(@grades) , multiple: true, id: 'grade_filters' , class: "select2 rounded w-100", data: { controller: 'filter' , action: "change->filter#setFilter" } %>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="graph-head text-center mt-4">
+    <h2>Concrete Strength - <span id="entity-name"> Project Name </span></h2>
+  </div>
+  <div class="container-fluid my-3 row justify-content-center mx-auto">
+    <div class="my-3 px-4 py-4 my-sm-0 container-fluid bg-white p-3 chart-container rounded-3 col-md-10 m-0 mx-2">
+      <canvas id="myChart" data-controller="barchart" data-bardata="<%= @concrete_strength_project_building_grade %>" ></canvas>
+    </div>
+  </div>
+ 
+
+    
+
+    
+
+</div>

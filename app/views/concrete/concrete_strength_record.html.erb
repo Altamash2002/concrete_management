@@ -1,0 +1,244 @@
+<!-- css  -->
+<style>
+    .table-content {
+        margin: 50px 5%;
+        text-align: center;
+    }
+
+    th , td {
+        width: 400px !important;
+        text-align: left;
+    }
+
+</style>
+
+<!-- form view of a table -->
+<div class="main-container">
+    <div class="scrollable-container">
+        <h1 class="centered-heading text-center my-5">Concrete strength record of Falcon Bldg</h1>
+    </div>
+    <div class="table-content">
+        
+        <% @projects.each do |project| %>
+        <table class="table table-responsive " id="table-list">
+            <tr>
+                <th>Project</th>
+                <td><%= project.name %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Sr.No</th>
+                <td><%= project.id %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td><%= project.date.strftime("%d-%m-%Y") %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>RMC/Site Concrete</th>
+                <td><%= project.concrete.present? ? project.concrete.rmc_site_concrete : "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Building</th>
+                <td><%= project.building_master.present? ? project.building_master.name : "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Structure</th>
+                <td><%= project.concrete&.structure || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Grade</th>
+                <td><%= project.concrete&.grade || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>W/B Ratio</th>
+                <td><%= project.concrete&.recipe&.cement&.wb_ratio || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Cement Brand</th>
+                <td><%= project.concrete&.recipe&.cement&.brand || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Cement (C/C kg/M3)</th>
+                <td><%= project.concrete&.recipe&.cement&.dosage || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>S.Plasticizer Brand</th>
+                <td><%= project.concrete&.recipe&.superplasticizer&.brand || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>S.Plasticizer Dosage (%/M3)</th>
+                <td><%= project.concrete&.recipe&.superplasticizer&.dosage || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>M.Admixture Brand</th>
+                <td><%= project.concrete&.recipe&.m_admixture&.brand || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>M.Admixture Dosage (kg/M3)</th>
+                <td><%= project.concrete&.recipe&.m_admixture&.dosage || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>3rd Binder Brand</th>
+                <td><%= project.concrete&.recipe&.m_silica&.brand || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>3rd Binder Dosage (kg/M3)</th>
+                <td><%= project.concrete&.recipe&.m_silica&.dosage || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>03Days</th>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "3 days", attempts: 1)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "3 days", attempts: 2)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "3 days", attempts: 3)&.result_value || "NA" %></td>
+                <td></td>
+                <th><%= ([project.strength_testing&.testing_results&.find_by(slot_type: "3 days", attempts: 1)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "3 days", attempts: 2)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "3 days", attempts: 3)&.result_value].sum/3.0).round rescue "NA" %></th>
+            </tr>
+            <tr>
+                <th>15Days</th>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "15 days", attempts: 1)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "15 days", attempts: 2)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "15 days", attempts: 3)&.result_value || "NA" %></td>
+                <td></td>
+                <th><%= ([project.strength_testing&.testing_results&.find_by(slot_type: "15 days", attempts: 1)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "15 days", attempts: 2)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "15 days", attempts: 3)&.result_value].sum/3.0).round rescue "NA" %></th>
+            </tr>
+            <tr>
+                <th>28Days</th>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 1)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 2)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 3)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 4)&.result_value || "NA" %></td>
+                <th><%= ([project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 1)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 2)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 3)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "28 days", attempts: 4)&.result_value].sum/4.0).round rescue "NA" %></th>
+                
+            </tr>
+            <tr>
+                <th>35Days</th>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "35 days", attempts: 1)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "35 days", attempts: 2)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "35 days", attempts: 3)&.result_value || "NA" %></td>
+                <td></td>
+                <th><%= ([project.strength_testing&.testing_results&.find_by(slot_type: "35 days", attempts: 1)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "35 days", attempts: 2)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "35 days", attempts: 3)&.result_value].sum/3.0).round rescue "NA" %></th>
+            </tr>
+            <tr>
+                <th>56Days</th>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "56 days", attempts: 1)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "56 days", attempts: 2)&.result_value || "NA" %></td>
+                <td><%= project.strength_testing&.testing_results&.find_by(slot_type: "56 days", attempts: 3)&.result_value || "NA" %></td>
+                <td></td>
+                <th><%= ([project.strength_testing&.testing_results&.find_by(slot_type: "56 days", attempts: 1)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "56 days", attempts: 2)&.result_value,
+                          project.strength_testing&.testing_results&.find_by(slot_type: "56 days", attempts: 3)&.result_value].sum/3.0).round rescue "NA" %></th>
+            </tr>
+            <tr>
+                <th>Density</th>
+                <td><%= project.strength_testing&.density || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Remark</th>
+                <td><%= project.strength_testing&.remark || "NA" %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Edit/Delete</th>
+                <td><button><a href="<%= edit_concrete_path(project) %>"><i class="bi bi-pencil-fill"></i></a></button></td>
+                <td>
+                <%= button_to concrete_path(project),
+                                method: :delete,
+                                data: { confirm: 'Are you sure you want to delete this record?' },
+                                form: { 'data-turbo-frame': 'table-list' },
+                                params: { authenticity_token: form_authenticity_token } do %>
+                    <i class="bi bi-trash3-fill"></i>
+                <% end %>
+                </td>
+
+              </tr>
+        </table>
+        <br><br><br>
+        <% end %>
+
+        <!-- add new concrete strength record button -->
+        <%= button_to new_concrete_path, class: "btn btn-info", id: "add" do %>
+            <span class="glyphicon glyphicon-plus-sign"></span>Add New Members
+        <% end %>
+    </div>
+</div>
+

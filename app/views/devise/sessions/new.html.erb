@@ -1,0 +1,104 @@
+<style>
+    /* password eye */
+    .password-container {
+        position: relative;
+    }
+
+    .password-toggle {
+        position: absolute;
+        top: 70%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .fa-eye-slash:before {
+        content: "\f070";
+    }
+
+    .fa-eye:before {
+        content: "\f06e";
+    }
+
+
+
+    input {
+        outline: none;
+    }
+
+    body {
+        background-color: whitesmoke;
+    }
+
+    .container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 15px gray;
+    }
+
+    .input {
+        width: 100%;
+        height: 50px;
+        background-color: whitesmoke;
+        border-radius: 7px;
+        border: none;
+        border: 1px solid grey;
+    }
+
+    .label {
+        font-size: 20px;
+    }
+
+    #button {
+        border-radius: 7px;
+        height: 45px;
+        width: 9rem;
+    }
+</style>
+<div class="container col-lg-4 col-11 py-5 px-4 my-5">
+    <div>
+        <h1 class="text-center">Sign In</h1>
+    </div>
+    <br>
+    <div class="my-3">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="my-2">
+            <label class="label" for="">Username/Email:</label>
+            <br>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input ps-2", placeholder: "Username or email address..." %>
+        </div>
+        <div class="password-container">
+            <label class="label" for="">Password:</label>
+            <br>
+            <%= f.password_field :password, autocomplete: "current-password", id: "password", class: "input ps-2", placeholder: "password" %>
+            <i class="fa fa-eye-slash password-toggle" onclick="togglePassword()"></i>
+        </div>
+
+        <br>
+        <div class="text-center mb-4">
+          <%= f.submit "Log in", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <div class="text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+
+    </div>
+</div>
+<script>
+  function togglePassword() {
+    var password = document.getElementById("password");
+    var icon = document.querySelector(".password-toggle");
+    if (password.type === "password") {
+        password.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        password.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }
+  }
+
+</script>
+

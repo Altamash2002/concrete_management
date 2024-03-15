@@ -1,0 +1,157 @@
+<style>
+  .input {
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .From {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  @media only screen and (min-width:321px) and (max-width:568px) {
+    .s-label {
+      text-align: center !important;
+    }
+
+    .s-label select {
+
+      width: 100% !important;
+    }
+
+    .input {
+
+      width: 100% !important;
+    }
+
+    .text-m {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
+  @media only screen and (max-height:1440px) and (max-height:320px) {
+    .container {
+      text-align: center !important;
+    }
+
+    .container {
+
+      height: 100% !important;
+    }
+
+    .container {
+
+      width: 100% !important;
+    }
+
+    .container {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+</style>
+
+
+<body style="background-color: #F5F5F5; overflow-x: hidden;">
+
+  <!-- chart -->
+
+  <div class="graph-head text-center mt-4">
+    <h6>Compressive Strength VS Density of M20 (7 days)</h6>
+  </div>
+  <div class="container my-3 row justify-content-center mx-auto">
+    <div class="my- px-4 py- my-sm-0 container bg-white p-3 chart-container rounded- col-md-8  mx-4"
+      style="height: px;">
+      <canvas id="myChart"></canvas>
+      <div class="row">
+        <div class="col-6">
+          <div style="text-align: center; margin-top: 20px;">
+            <h6><i class="bi bi-square-fill" style="color: grey;"></i>Compressive Strength (MPa)</h6>
+          </div>
+        </div>
+        <div class="col-6">
+          <div style="text-align: center; margin-top: 20px;">
+            <h6> <i class="bi bi-dash-lg"> </i>Density (kg/m2)</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script>
+      const data = {
+        labels: ['Mix 1', 'Mix 2', 'Mix 3', 'Mix 4', 'Mix 5', 'Mix 6'],
+        datasets: [
+
+          {
+            type: 'line', // Add a line chart dataset
+            data: [12, 12, 20, 24, 22, 20], // Add your data points for the line
+            // backgroundColor: 'transparent',
+            borderColor: '#000000',
+            borderWidth: 1,
+            pointRadius: 0,
+            label: 'Line Dataset',
+            yAxisID: 'y',
+          },
+          {
+            data: [23, 18, 19, 24, 21, 20],
+            backgroundColor: '#B4B8E5',
+            borderColor: '#565A8E',
+            borderWidth: 0,
+            label: 'Bar Dataset',
+          },
+        ]
+      };
+
+
+
+      // config
+      const config = {
+        type: 'bar',
+        data: data,
+        options: {
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              }
+            },
+            y: {
+              grid: {
+                drawBorder: false,
+              },
+              beginAtZero: true,
+              max: 25,
+              stepSize: 5,
+              ticks: {
+                callback: function (value) {
+                  if (value === 0 || value === 25) {
+                    return value;
+                  }
+                  return value % 5 === 0 ? value : '';
+                }
+              },
+              title: {
+                display: true,
+                text: 'Compressive Strength (MPa)',
+                font: {
+                  weight: 'bold'
+
+                }
+              }
+            }
+          }
+        }
+      };
+      // Render chart
+      const ctx = document.getElementById('myChart').getContext('2d');
+      new Chart(ctx, config);
+    </script>
+
+  </div>
+</body>

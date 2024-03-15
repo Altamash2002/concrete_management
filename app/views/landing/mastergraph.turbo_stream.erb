@@ -1,0 +1,33 @@
+<style>
+  
+  @media only screen and (min-width:321px) and (max-width:568px) {
+    .s-label {
+      text-align: center !important;
+    }
+
+    .s-label select {
+
+      width: 100% !important;
+    }
+
+    .input {
+
+      width: 100% !important;
+    }
+
+    .text-m {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+  
+</style>
+
+
+<div style="background-color: #F5F5F5; overflow-x: hidden;">
+  <%= render "/landing/filterbar" %>
+  <%= turbo_stream.replace "concrete_graph" do %>
+    <%= render "/landing/concrete_graph" %>
+  <% end %>
+</div>

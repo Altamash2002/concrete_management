@@ -1,0 +1,180 @@
+<style>
+    .heading {
+        color: #757575;
+        border: 4px solid #757575;
+        background: #fff;
+        padding: 2px 10px;
+        width: fit-content;
+        font-size: 35px;
+    }
+    .heading-row{
+        background-color: #E9E9E9;
+    }
+    .grey-row:nth-child(odd) {
+        background-color: #E9E9E9;
+    }
+    .grey-row:nth-child(even) {
+        background-color: #CACACA;
+    }
+    td {
+        text-align: center;
+        padding: 15px 0px !important;
+        font-size: 20px;
+        vertical-align: middle;
+    }
+    th {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 15px 0px !important;
+        vertical-align: middle;
+    }
+    .button {
+     display: flex;
+     justify-content: end;
+    }
+    .primary-btn{
+        border-radius: 10px;
+        border: 1px solid #000;
+        background: #FFF;
+        font-size: 18px;
+        padding: 4px 28px;
+        font-weight: 700;
+    }
+</style>
+
+  <div class="main-container">
+    <div class="heading-container text-center text-md-start">
+      <h1 class="heading mt-5 mb-2 mb-md-0 mx-5">
+        Grey ZONE
+      </h1>
+    </div>
+     <div id="email-success-alert" class="alert alert-success" style="display: none;">
+      Email sent successfully! <i class="bi bi-check-circle-fill"></i>
+    </div>
+    <div class="main-container">
+      
+      <div class="mx-md-5 row justify-content-end">
+        <div class="col-md-2 form-group py-4" id="send-button">
+          <button id="sendMailButton" class="primary-btn">Send Via Mail</button>
+        </div>
+      </div> 
+      <div class="table-container mx-1 mx-md-5 overflow-auto" style=" border: 4px solid black;">
+          <table class="table table-responsive m-0">
+              <tr class="heading-row">
+                  <th style="min-width: 80px;">SELECT</th>
+                  <th style="min-width: 250px;">DATE</th>
+                  <th style="min-width: 250px;">PROJECT</th>
+                  <th style="min-width: 250px;">BUILDING</th>
+                  <th style="min-width: 250px;">RMC/SITE PLANT</th>
+                  <th style="min-width: 250px;">STRUCTURE</th>
+                  <th style="min-width: 150px;">GRADE</th>
+                  <th style="min-width: 250px;">CEMENT BRAND</th>
+                  <th style="min-width: 130px;">2 DAYS</th>
+                  <th style="min-width: 130px;">3 DAYS</th>
+                  <th style="min-width: 180px;">5 DAYS</th>
+                  <th style="min-width: 180px;">7 DAYS</th>
+                  <th style="min-width: 130px;">10 DAYS</th>
+                  <th style="min-width: 130px;">14 DAYS</th>
+                  <th style="min-width: 130px;">15 DAYS</th>
+                  <% if  current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge?  %>
+                    <% else %>
+                  <th style="min-width: 130px;">EDIT</th>
+                  <% end %> 
+        
+              </tr>
+              <% @grey_values.each_with_index do |value, index| %>
+                <tr class="grey-row">
+                  <td><input class="form-check-input" type="checkbox" name="selectedRows"></td> 
+                  <td><%= value.date %></td>
+                  <td><%= value.project_master&.name %></td>
+                  <td><%= value.building_master&.name %></td>
+                  <td><%= value.rmc_list&.name %></td>
+                  <td><%= value.structure_master&.name %></td>
+                  <td><%= value.grade_master&.name %></td>
+                  <td><%= value.cement&.brand %></td>
+                  <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '2 days', 0),value&.grade_master&.name, '2 days') %>"><%= calculate_average(value&.testing_results, '2 days', 0) %> / (<%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '2 days').pluck(:value).first.to_i %>) </td>
+                  <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '3 days', 0),value&.grade_master&.name, '3 days') %>"><%= calculate_average(value&.testing_results, '3 days', 0) %> / (<%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '3 days').pluck(:value).first.to_i %>) </td>
+                  <td style="color: <%= fs_calculate_color(calculate_average(value&.testing_results, '5 days', 0),value&.grade_master&.name, value&.structure_master&.name) %>"><%= calculate_average(value&.testing_results, '5 days', 0) %> / (<%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '5 days A').pluck(:value).first.to_i %> , <%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '5 days B').pluck(:value).first.to_i %>)</td>
+                  <td style="color: <%= fs_calculate_color(calculate_average(value&.testing_results, '7 days', 0),value&.grade_master&.name, value&.structure_master&.name) %>"><%= calculate_average(value&.testing_results, '7 days', 0) %> / (<%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '7 days A').pluck(:value).first.to_i %> , <%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '7 days B').pluck(:value).first.to_i %>)</td>
+                  <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '10 days', 0),value&.grade_master&.name, '10 days') %>"><%= calculate_average(value&.testing_results, '10 days', 0) %> / (<%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '10 days').pluck(:value).first.to_i %>) </td>
+                  <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '14 days', 0),value&.grade_master&.name, '14 days') %>"><%= calculate_average(value&.testing_results, '14 days', 0) %> / (<%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '14 days').pluck(:value).first.to_i %>) </td>
+                  <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '15 days', 0),value&.grade_master&.name, '15 days') %>"><%= calculate_average(value&.testing_results, '15 days', 0) %> / (<%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '15 days').pluck(:value).first.to_i %>) </td>
+                  <% if  current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge?  %>
+                  <% else %>
+                    <td class="show">
+                      <%= link_to "/strength_testings/#{value.id}/edit" do %>
+                        <span><i class="bi bi-pencil-fill"></i></span>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+          </table>
+      </div>
+      
+    </div> 
+    <div class="py-5"></div>
+    <lable></lable>
+  </div>
+ 
+<script>
+  // JavaScript code to handle sending emails with selected rows
+  document.getElementById("sendMailButton").addEventListener("click", function() {
+    var selectedRows = document.getElementsByName("selectedRows");
+    var emailBody = "";
+    var selectedBuildingName = null; // Initialize the building name as null
+
+    for (var i = 0; i < selectedRows.length; i++) {
+      if (selectedRows[i].checked) {
+        var row = selectedRows[i].parentNode.parentNode;
+        var date = row.cells[1].innerText;
+        var project = row.cells[2].innerText;
+        var building = row.cells[3].innerText;
+        var rmc = row.cells[4].innerText;
+        var structure = row.cells[5].innerText;
+        var grade = row.cells[6].innerText;
+        var cement = row.cells[7].innerText;
+        var days2 = row.cells[8].innerText;
+        var days3 = row.cells[9].innerText;
+        var days5 = row.cells[10].innerText;
+        var days7 = row.cells[11].innerText;
+        var days10 = row.cells[12].innerText;
+        var days14 = row.cells[13].innerText;
+        var days15 = row.cells[14].innerText;
+
+
+        emailBody += "DATE: " + date + "%0D%0A";
+        emailBody += "PROJECT: " + project + "%0D%0A";
+        emailBody += "BUILDING: " + building + "%0D%0A";
+        emailBody += "RMC: " + rmc + "%0D%0A";
+        emailBody += "STRUCTURE: " + structure + "%0D%0A";
+        emailBody += "GRADE: " + grade + "%0D%0A";
+        emailBody += "CEMENT: " + cement + "%0D%0A";
+        emailBody += "2 DAYS: " + days2 + "%0D%0A";
+        emailBody += "3 DAYS: " + days3 + "%0D%0A";
+        emailBody += "5 DAYS: " + days5 + "%0D%0A";
+        emailBody += "7 DAYS: " + days7 + "%0D%0A";
+        emailBody += "10 DAYS: " + days10 + "%0D%0A";
+        emailBody += "14 DAYS: " + days14 + "%0D%0A";
+        emailBody += "15 DAYS: " + days15 + "%0D%0A";
+
+        emailBody += "%0D%0A"; // add empty line between rows
+        emailBody += "%0D%0A"; // add empty line between rows
+
+        // Set the selected building name
+        if (selectedBuildingName === null) {
+          selectedBuildingName = building;
+        }
+      }
+    }
+
+    if (selectedBuildingName === null) {
+      alert("Please select at least one row.");
+    } else {
+      var emailSubject = "Grey Zone Values";
+      var emailLink = "mailto:?subject=" + emailSubject + "&body=" + emailBody;
+      window.open(emailLink, '_blank');
+    }
+  });
+</script>

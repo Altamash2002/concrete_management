@@ -1,0 +1,29 @@
+<div id="concrete_graph">
+    <div class="graph-head text-center mt-4">
+        <h2>Latest Concrete Strength Results</h2>
+    </div>
+    <% if params[:building_id] %>
+        <div class="container-fluid my-3 row justify-content-center mx-auto">
+          <div class="my-12 px-4 py-4 my-sm-0 bg-white p-3 chart-container rounded-3 col-md-10 m-0 mx-2">
+            <h6 class="d-flex justify-content-center">
+              <div class="col-md-6">
+                <% if params[:building_name] %>
+                  <span style="font-size: 16px;">Building: <%= params[:building_name] %></span>
+                <% end %>
+              </div>
+              <div claa="col-md-6">
+                <% if params[:grade_name] %>
+                  <span class="ml-auto" style="font-size: 16px;">Grade: <%= params[:grade_name] %></span>
+                <% end %>
+              </div>
+            </h6>
+          </div>
+        </div>
+      <% else %>
+      <% end %>
+    <div class="container-fluid my-3 row justify-content-center mx-auto">
+        <div class="my-3 px-4 py-4 my-sm-0 container-fluid bg-white p-3 chart-container rounded-3 col-md-10 m-0 mx-2">
+            <canvas id="myChart" data-controller="barchart"data-ytitle="Average strength(kg/sq.cm)  " data-xtitle="Date" data-bardata="<%= @concrete_strength_project_building_grade %>" data-annotation="<%= @annotation %>" ></canvas>
+        </div>
+    </div> 
+</div>

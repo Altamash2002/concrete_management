@@ -1,0 +1,6 @@
+<div style="background-color: #F5F5F5; overflow-x: hidden;">
+  <%= render 'comparison/filterbar_super' %>
+  <%= turbo_stream.replace "superplasticizer_wise" do %>
+    <%= render 'comparison/superplasticizer_comparison' %>
+  <% end %>
+</div>

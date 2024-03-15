@@ -1,0 +1,90 @@
+<style>
+  .button-pad {
+    padding: 15px;
+  }
+
+  .button-color {
+    background-color: #000000;
+    border: none;
+    color: white;
+  }
+
+  .button-color:hover {
+    background-color: #000000;
+    color: white;
+    border: none;
+  }
+
+  .containe {
+    height: 60vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+   .group-image {
+    text-align: center;
+  }
+
+  .data-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .traits{ 
+      background-color: #D9D9D9;
+      border: none;
+      color: black;
+ 
+  } 
+  @media (max-width: 390px) {
+    .containe {
+      height: 34vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>
+
+<div id="failed_status_table">
+  <div class="scrollable-container">
+      <h1 class="centered-heading text-center my-4">Latest 30 Days Result</h1>
+    </div>
+  <div class="d-flex justify-content-center py-3">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/last_30_days" class="btn btn-secondary font-weight-bold traits", style= "width:120px" >Record</a>
+      <a href="/failed_status" class="btn btn-secondary font-weight-bold button-color", style= "width:120px" >Analytics</a>
+    </div>
+  </div>
+  <div class="container-fluid px-5">
+    <div class="my-5 pb-5">
+      <table class="table table-responsive rounded-3 table-bordered bg-white" id="table-list">
+        <thead>
+          <th class="main-tbl-th" style="min-width: 250px;">Cement Brand</th>
+          <th class="main-tbl-th" style="min-width: 80px;">% Failure in 28 days</th>
+          <th class="main-tbl-th" style="min-width: 80px;">No. of result</th>
+          <th class="main-tbl-th" style="min-width: 80px;">No. of pass result</th>
+          <th class="main-tbl-th" style="min-width: 80px;">No. of failed result</th>
+        </thead>
+
+        <tbody id="table-list-body">
+          <% @cement_data.each do |cement_id, data| %>
+            <tr>
+              <td class="main-tbl-td"><%= data[:brand] || "NA" %></td>
+              <td class="main-tbl-td"><%= data[:percentage_failed_in_28_days].round %>%</td>
+              <td class="main-tbl-td"><%= data[:total_data_in_28_days] %></td>
+              <td class="main-tbl-td"><%= data[:num_passed_in_28_days] %></td>
+              <td class="main-tbl-td"><%= data[:num_failed_in_28_days] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="py-5" style="height: 386px; width: 400px; display: block; margin: auto;"> 
+        <center> 
+          <canvas id="chart" data-controller="doughnut_chart" data-bardata="<%= @failed_status %>"></canvas>
+        </center>
+      </div>
+    </div>
+  </div> 
+</div>

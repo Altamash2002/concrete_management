@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grade: MyString
+  day: MyString
+  percentage: 1.5
+  value: 1.5
+
+two:
+  grade: MyString
+  day: MyString
+  percentage: 1.5
+  value: 1.5

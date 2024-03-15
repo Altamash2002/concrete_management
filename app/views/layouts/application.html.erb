@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HiranandaniConereteQa</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+
+    <style>
+      body{
+        background-color: whitesmoke;
+      }
+      .parent{
+        color: black !important;
+        font-size: 18px;
+        padding: 5px 0px;
+        padding-left: 20px !important;
+        font-weight: 600;
+      }
+      .divider-bold{
+        border-top: 2px solid black !important;
+      }
+      .child{
+        padding: 5px 35px;
+      }
+      .child i{
+        font-size: 12px;
+      }
+      .dropdown-item{
+        font-size: 20px
+      }
+      .custom-offcanvas{
+        background-color: #B4B8E5;
+        width: 600px !important;
+      }
+      .profile-drop{
+        background-color: #B4B8E5;
+      }
+      .offcanvas-body{
+        padding: 20px 0 !important;
+      }
+      ul{
+        list-style-type: none;
+        padding-inline-start: 5px !important;
+      }
+      .hover:hover{
+        background-color: whitesmoke;
+      }
+      .bi-circle-fill{
+        font-size: 10px;
+      }
+      .navbar-toggler{
+        font-size: 27px;
+      }
+      .logo-img{
+        width: 140px !important;
+      }
+      .dropdown-menu[data-bs-popper] {
+        top: 100%;
+        left: 22px;
+        margin-top: var(--bs-dropdown-spacer);
+      }
+      .footer-links{
+        text-decoration: none;
+        font-size: 15px;
+        width: fit-content;
+        letter-spacing: 0.5px;
+        color: #c8c8c8;
+      }
+      .footer-links:hover{
+        color: #c8c8c8;
+        font-size: 16px;
+      }
+      .footer-headings{
+        font-size: 17px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        color: #fff;
+        margin-bottom: 15px;
+      }
+      .icons{
+        text-decoration: none !important;
+        font-size: 20px;
+      }
+      .icons:hover{
+        color: blue !important;
+      }
+      .copyright{
+        font-size: 13px;
+        letter-spacing: 0.5px;
+      }
+      .powered{
+        font-size: 16px;
+      }
+      .powered-a:hover{
+        color: #c8c8c8 !important;
+      }
+      .icons-div{
+        height: fit-content;
+      }
+      #loader{
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 999999;
+        background: url(<%= asset_path 'YlWC.gif' %>) 50% 50% no-repeat rgb(15 10 10 /59%);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <!-- Container wrapper -->
+      <div class="container-fluid row justify-content-between">
+        <!-- Navbar brand -->
+        <div class="navbar-brand col-md-8 col-4">
+          <%= link_to root_path, class: "text-white", style: "text-decoration: none;" do %>
+            <%= image_tag("Final_HOH_LOGO.png", alt: "Logo", class: "mr-2 logo-img", style: " max-width: 120px;") %>
+            <% end %>
+        </div>
+
+        <!-- Profile -->
+        <div class="nav col-md-3 col-5 row justify-content-md-end justify-content-center"> 
+          <div class="dropdown" style="width: fit-content;">
+            <a class="nav-link dropdown-toggle text-white" style="font-weight: 500; font-size: 18px;" href="#"
+                  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i>
+                  Profile</a>
+            <ul class="dropdown-menu profile-drop px-0">
+              <li><a class="dropdown-item hover" href="/profile">My Account</a></li>              
+              <li><hr class="divider m-0"></li>
+              <li>
+                <%= link_to "Sign out", destroy_user_session_path, class: 'dropdown-item hover', data: { turbo_method: :delete } %>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Dashboard menu -->
+        <div class="nav col-1">
+          <div class="row justify-content-end w-100"><button style="width: fit-content;" class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style="color: white; font-size: 25px;" class="bi bi-list"></i></button></div>
+          <div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h3 id="offcanvasRightLabel">Dashboard Menu</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">              
+              <ul>
+                <li>
+                  <%= link_to "/last_30_days", class: "dropdown-item parent hover" do %>
+                    <i class="bi bi-card-list"></i>
+                    <span>High Strength Concrete Record</span>
+                  <%end%>
+                </li> 
+                <li><hr class="divider divider-bold"></li>
+                <li>
+                  <%= link_to "/strength_testings", class: "dropdown-item parent hover" do %>
+                    <i class="bi bi-buildings"></i>
+                    <span>Concrete Cube Strength Record</span>
+                  <%end%>
+                </li>
+                <li><hr class="divider divider-bold"></li>
+                <li>
+                  <%= link_to "/masterview", class: "dropdown-item parent hover" do %>
+                    <i class="bi bi-house"></i>
+                    <span>Main Dashboard</span>
+                  <%end%>
+                </li>
+                <li><hr class="divider divider-bold"></li>
+                <li>
+                  <%= link_to "/mastergraph", class: "dropdown-item parent hover" do %>
+                    <i class="bi bi-graph-up"></i>
+                    <span>Concrete Strength Graph</span>
+                  <%end%>
+                </li> 
+                <li><hr class="divider divider-bold"></li>
+
+                <div class="nav col-md-3 col-5 row justify-content-md-end justify-content-center"> 
+                  <div class="dropdown" style="width: fit-content;">
+                    <a class="nav-link dropdown-toggle text-black" style="font-weight: 500; font-size: 19px;" href="#"
+                          role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          &nbsp;<i class="bi bi-bar-chart-line"></i>
+                          Comparison Graphs</a>
+                    <ul class="dropdown-menu profile-drop px-0">
+                      <li>
+                        <%= link_to "/comparison", class: "dropdown-item child container-fluid m-0 hover" do %>
+                          <span>Cement wise</span>
+                        <%end%>
+                      </li>  
+
+                      <li><hr class="divider divider-bold m-0"></li>
+                      <li>
+                        <%= link_to "/comparison/flyash", class: "dropdown-item child container-fluid m-0 hover" do %>
+                          <span>Binder 1 Flyash wise</span>
+                        <%end%>
+                      </li> 
+
+                      <li><hr class="divider divider-bold m-0"></li>
+                      <li>
+                        <%= link_to "/comparison/micro_silica", class: "dropdown-item child container-fluid m-0 hover" do %>
+                          <span>Binder 2 Micro Silica wise</span>
+                        <%end%>
+                      </li>
+
+                      <li><hr class="divider divider-bold m-0"></li>
+                      <li>
+                        <%= link_to "/comparison/superplasticizer", class: "dropdown-item child container-fluid m-0 hover" do %>
+                          <span>Super Plasticizer wise</span>
+                        <%end%>
+                      </li> 
+
+                      <li><hr class="divider divider-bold m-0"></li>
+                      <li>
+                        <%= link_to "/comparison/rmc_concrete", class: "dropdown-item child container-fluid m-0 hover" do %>
+                          <span>RMC wise</span>
+                        <%end%>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                 <li><hr class="divider divider-bold"></li>
+                 <li>
+                  <%= link_to "/standard_deviation", class: "dropdown-item parent hover" do %>
+                    <i class="bi bi-buildings"></i>
+                    <span>Standard Deviation</span>
+                  <%end%>
+                </li>
+                <li><hr class="divider divider-bold"></li>
+                 <div class="nav col-md-3 col-5 "> 
+                 <div class="dropdown" style="width: fit-content;">
+                   <a class="nav-link dropdown-toggle text-black" style="font-weight: 500; font-size: 19px;" href="#"
+                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         &nbsp;<i class="bi bi-globe-central-south-asia"></i>
+                         Zone</a>
+                   <ul class="dropdown-menu profile-drop px-0">
+                   <li>
+                      <%= link_to "/zone/red", class: "dropdown-item child container-fluid m-0 hover" do %>
+                         <span>Red Zone</span>
+                      <%end%>
+                    </li> 
+                    <li><hr class="divider divider-bold m-0"></li>
+                    <li>
+                    <%= link_to "/zone/grey", class: "dropdown-item child container-fluid m-0 hover" do %>
+                       <span>Grey Zone</span>
+                    <%end%>
+                  </li>     
+                  <li><hr class="divider divider-bold m-0"></li>    
+                  <li>
+                    <%= link_to "/zone/green", class: "dropdown-item child container-fluid m-0 hover" do %>
+                       <span>Green Zone</span>
+                    <%end%>
+                  </li>   
+                    </ul>
+                 </div>
+               </div> 
+                <li><hr class="divider divider-bold"></li>
+                <li>
+                  <%= link_to "/bmc_tmc_report", class: "dropdown-item parent hover" do %>
+                    <i class="bi bi-journal-text"></i>
+                      <span>BMC/TMC Report</span>
+                  <%end%>
+                </li>
+                <li><hr class="divider divider-bold"></li>
+                <li>
+                  <%= link_to "/overall_failure_report", class: "dropdown-item parent hover" do %>
+                    <i class="bi bi-journal-x"></i>
+                      <span>Overall Failure Report</span>
+                  <%end%>
+                </li>
+              </ul>
+                
+            </div>
+          </div>
+        </div>     
+      </div>
+    </nav>
+
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
+    <div class="main-wrapper" style="min-height: 80vh;">
+      <%= yield %>
+    </div>
+
+    <div id="loader" style="display: none;"></div>
+ 
+    <!-- Footer -->
+    <footer
+            class="text-center text-lg-start text-white"
+            style="background-color: #252525; bottom: 0; position: relative; width: 100%;"
+
+            >
+      <!-- Section: Social media -->
+  
+      <section class="row container-fluid justify-content-center pt-2 pt-md-5 pb-5 px-0 px-md-auto mx-0 mx-md-auto">
+        <div class="col-md-3">
+          <div class="text-center text-md-start my-3 my-md-0">
+            <h3 class="footer-headings text-uppercase fw-bold mb-4">Important Links</h3>
+            <a href="/strength_testings" class="footer-links">Concrete Cube Strength Record</a> <br><br>
+            <a href="/" class="footer-links">Main Dashboard</a> <br><br>
+            <a href="/mastergraph" class="footer-links">Concrete Strength Graph</a> <br><br>
+            <a href="/bmc_tmc_report" class="footer-links">BMC/TMC Report</a> <br><br>
+            <a href="/overall_failure_report" class="footer-links">Overall Faliure Report</a> <br><br>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center text-md-start mb-3 my-md-0">
+            <h3 class="footer-headings text-uppercase fw-bold mb-4">Comparison Graphs</h3>
+            <a href="/comparison" class="footer-links">Cement wise</a> <br><br>
+            <a href="/comparison/flyash" class="footer-links">Binder 1 Flyash wise</a> <br><br>
+            <a href="/comparison/micro_silica" class="footer-links">Binder 2 Micro Silica wise</a> <br><br>
+            <a href="/comparison/superplasticizer" class="footer-links">Superplasticizer wise</a> <br><br>
+            <a href="/comparison/rmc_concrete" class="footer-links">RMC wise</a> <br><br>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="text-center text-md-start mb-3 my-md-0">
+            <h3 class="footer-headings text-uppercase fw-bold mb-4">Zones</h3>
+            <a href="/zone/red" class="footer-links">Red Zone</a><br><br>
+            <a href="/zone/grey" class="footer-links">Grey Zone</a><br><br>
+            <a href="/zone/green" class="footer-links">Green Zone</a><br><br>
+          </div>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="row col-md-3">
+          <!-- Links -->
+          <div class="col-2 icons-div">
+            <a href="https://www.facebook.com/HouseofHiranandani/" target="_blank" class="text-white icons">
+              <i class="bi bi-facebook"></i>
+            </a>
+          </div>
+          <div class="col-2 icons-div">
+            <a href="https://twitter.com/HOHExclusive/" target="_blank" class="text-white icons">
+              <i class="bi bi-twitter"></i>
+            </a>
+          </div>
+          <div class="col-2 icons-div">
+            <a href="https://www.youtube.com/channel/UC5b7xMV-q5ZIkJf0SxtlRdg/" target="_blank" class="text-white icons">
+              <i class="bi bi-youtube"></i>
+            </a>
+          </div>
+          <div class="col-2 icons-div">
+            <a href="https://www.instagram.com/houseofhiranandani/" target="_blank" class="text-white icons">
+              <i class="bi bi-instagram"></i>
+            </a>
+          </div>
+          <div class="col-2 icons-div">
+            <a href="https://www.linkedin.com/company/house-of-hiranandani/" target="_blank" class="text-white icons">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
+          <div class="col-2 icons-div">
+            <a href="https://www.pinterest.com/HOHiranandani/" target="_blank" class="text-white icons">
+              <i class="bi bi-pinterest"></i>
+            </a>
+          </div>
+
+          <div class="col-12 d-none d-md-block text-center">
+            <%= link_to root_path, class: "text-white", style: "text-decoration: none;" do %>
+              <%= image_tag("hiralogo.png", alt: "Logo", height: "30px", class: "mr-2 logo-img") %>
+            <% end %>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Section: Links  -->
+
+      <!-- Copyright -->
+      <div class="row container-fluid justify-content-center align-items-center pb-5 mx-0">
+        <div class="col-md-4 mx-auto px-0 hrule"><hr class="my-0"></div>
+        <div class="copyright col-md-4 mx-auto text-center">
+            © COPYRIGHT 2021-2022 HOUSE OF HIRANANDANI. ALL RIGHTS RESERVED
+        </div>
+        <div class="col-md-4 mx-auto px-0 hrule"><hr class="my-0"></div>
+      </div>
+      
+      <div class="text-center pb-5 powered">
+        Powered by <a class="text-white powered-a text-decoration-none" href="https://ssingularity.co.in/" target="_blank">@Ssingularity Technologies</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+  </body>
+</html>

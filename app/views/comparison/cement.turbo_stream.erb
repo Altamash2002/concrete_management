@@ -1,0 +1,6 @@
+<div style="background-color: #F5F5F5; overflow-x: hidden;">
+  <%= render 'comparison/filterbar' %>
+  <%= turbo_stream.replace "cement_wise" do %>
+    <%= render 'comparison/cement_comparison' %>  
+  <% end %>
+</div>

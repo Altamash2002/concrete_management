@@ -1,0 +1,22 @@
+<!-- app/views/strength_testings/latest_falcon_data.html.erb -->
+
+<h1>Latest Falcon Data</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Building Name</th>
+      <th>Slot Type</th>
+      <th>Result Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @falcon_data.each do |testing_result| %>
+      <tr>
+        <td><%= testing_result.strength_testing.building_master.name %></td>
+        <td><%= testing_result.slot_type %></td>
+        <td><%= testing_result.result_value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

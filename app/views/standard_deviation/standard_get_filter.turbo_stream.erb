@@ -1,0 +1,5 @@
+<%= render 'standard_deviation/filterbar' %>
+
+<%= turbo_stream.replace "standard_deviation" do %>
+    <%= render 'standard_deviation/deviation' %>
+<% end %>

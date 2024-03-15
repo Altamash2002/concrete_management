@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "strength-testings-page-#{@pagy.page}" do %>
+  <%= turbo_stream.append "table-list-body" do %>
+    <% @strength_testings.each do |st| %>
+      <%= render partial: "strength_testing_row", locals: {st: st} %>
+    <% end %>
+    <%= render partial: "next_page" %>
+  <% end %>
+<% end %>
+

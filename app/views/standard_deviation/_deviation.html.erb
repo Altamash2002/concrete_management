@@ -1,0 +1,86 @@
+<div id="standard_deviation">
+  <style>
+    canvas { 
+      display: block; 
+      margin: 0 auto; 
+      height: 308px! important; 
+      width: 789px; 
+    } 
+    .horizontal{ 
+      padding: 100px; 
+    }
+    .legend-container {
+      display: flex;
+      justify-content: right;
+      padding: 10px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      font-size: 14px;
+    }
+    .legend-color {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+    }
+    .legend-label {
+      white-space: nowrap;
+    }
+      canvas {
+      margin-top: 20px;
+    } 
+    @media screen and (min-width: 390px) and (max-width: 844px) {
+      .horizontal {
+        padding: 10px;  
+        overflow-x: hidden;  
+      }
+    } 
+    .previous-link{
+      color: #565A8E;
+    }
+    .build{
+      font-size: 16px; 
+      font-weight: bold;
+    }
+  </style>
+  <div class="col-md-5">
+    <div class="row">
+      <% if params[:building_id]%>
+        <div class="col-md-2 previous-link">
+          <%= link_to standard_deviation_index_path(building_id: params[:building_id]), class: "dropdown-item child row align-items-center container-fluid m-0" do %>
+            <span class="build">BUILDINGS ></span>
+          <% end %>
+        </div>
+      <% end %> 
+      <% if params[:grade_id]%>
+        <div class="col-md-2 previous-link">
+          <%= link_to standard_deviation_grade_path(building_id: params[:building_id], grade_id: params[:grade_id]), class: "dropdown-item child row align-items-center container-fluid m-0" do %>
+            <span class="build">GRADES ></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-15 py-5 text-center mb-2 bg-grey rounded-3 d-flex justify-content-center">
+    <div class="bg-white col-md-8"> <!-- Increased width to col-md-12 for the graph -->
+      <div class="container-fluid">
+        <div class="legend-container">
+          <% categories = ["V. Good", "Good", "Fair", "Poor"] %>
+          <% colors = ['rgba(0, 128, 0, 0.7)', 'rgba(0, 0, 255, 0.7)', 'rgba(255, 255, 0, 0.7)', 'rgba(255, 0, 0, 0.7)'] %>
+          <% categories.each_with_index do |category, index| %>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: <%= colors[index] %>"></div>
+              <div class="legend-label"><%= category %></div>
+            </div>
+          <% end %>
+        </div>
+        <h5 class="sec-heading text-center my-2"></h5> <hr class="my-0">
+        <div class="py-5 d-flex justify-content-center">
+          <canvas id="chart" data-controller="horizontalbar" data-bardata="<%= @sd_data %>"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

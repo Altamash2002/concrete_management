@@ -1,0 +1,61 @@
+<style>
+  .drill-bg{
+    background-color: white;
+    border-radius: 10px;
+    height: 120px;
+    vertical-align: center;
+    color: black;
+  }
+  .heading-div{
+    text-align: center;
+    background-color: white;
+    color: black;
+    padding: 5px 40px;
+  }
+  .comp-heading{
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .center{
+        padding-top: 50px;
+  }
+  .color-text{
+    color: black;
+  }
+  .shadow{
+  box-shadow: 10px 10px 5px lightblue;
+  }
+</style>
+<div class="container-fluid   py-5 d-flex justify-content-center align-items-center">
+  <div class="rounded-3 shadow" style="width:80%; height: 319px; object-fit: cover;background: url(<%= asset_path 'project.jpg' %>);background-size: cover;background-position: 9% 65%;">
+    <div class="row align-items-center h-100">
+      <div class="col-md-12">
+        <h2 class="mx-auto text-center bg-white rounded-3 p-3" style="width: fit-content">Projects</h2>
+      </div>
+    </div>
+  </div>
+</div> 
+<div class="container-fluid" style="width: 80%;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row justify-content-center mb-5">
+        <% @projects.each_slice(3) do |projects_slice| %>
+          <div class="row">
+            <% projects_slice.each do |project| %>
+              <% project_id, project_name = project %>
+              <div class="col-md-4 col-sm-6 py-2">
+                <div class="card shadow">
+                  <div class="card-body d-flex align-items-center" style="padding-top: 25px; padding-bottom: 25px;">
+                    <img src="<%= asset_path 'project_10.svg' %>" alt="Project Image" class="img-fluid me-3" style="max-width: 70px;">
+                    <h5><%= link_to project_name, drildown_strength_testing_building_path(project_id: project_id), class: "text-decoration-none color-text" %></h5>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,171 @@
+<div id="<%= dom_id strength_testing %>" class="container">
+  <% st = @strength_testing %>
+  <div class="main-container">
+    <div class="table-content">
+          <table class="table table-responsive " id="table-list">
+               
+              <tr>
+                  <th>Sr.No</th>
+                  <td><%= st.sr_no %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Project</th>
+                  <td><%= st&.project_master&.name ||  "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Date</th>
+                  <td><%= st&.date&.strftime("%d-%m-%Y") %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>RMC/Site plant</th>
+                  <td><%= st&.rmc_list&.name ||  "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Building</th>
+                  <td><%= st.building_master.present? ? st.building_master.name : "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Structure</th>
+                  <td><%= st&.structure_master&.name || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                    <th>Location</th>
+                    <td><%= st&.location || "NA" %></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+              </tr>
+              <tr>
+                  <th>Grade</th>
+                  <td><%= st&.grade_master&.name || "NA"  %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>W/B Ratio</th>
+                  <td><%= st.w_b_ratio || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Cement Brand</th>
+                  <td><%= st&.cement&.brand || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Cement Content (kg/M3)</th>
+                  <td><%= st&.cement_c_c_kg_m3 || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Super Plasticizer Brand</th>
+                  <td><%= st&.superplasticizer&.brand || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Super Plasticizer Dosage (%/M3)</th>
+                  <td><%= st&.s_plasticizer_dosage || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Mineral Admixture Brand</th>
+                  <td><%= st&.m_admixture&.brand || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr> 
+              <tr>
+                  <th>Mineral Admixture Dosage (kg/M3)</th>
+                  <td><%= st&.m_admixture_dosage || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr> 
+              <tr>
+                  <th>3rd Binder Brand</th>
+                  <td><%= st&.m_silica&.brand || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>3rd Binder Dosage (kg/M3)</th>
+                  <td><%= st&.m_silica_dosage || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr> 
+              <tr>
+                  <th>Density</th>
+                  <td><%= st&.new_density || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Number of Cubes</th>
+                  <td><%= st&.number_of_cubes || "NA" %></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+               <tr>
+                  <th>Created_by</th>
+                 <td><%= st&.user&.email %></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+             
+          </table>
+    </div>
+  </div>
+</div>

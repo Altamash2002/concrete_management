@@ -1,0 +1,30 @@
+<table class="table table-responsive m-0">
+  <tr class="heading-row">
+    <th style="min-width: 250px;">DATE</th>
+    <th style="min-width: 250px;">PROJECT</th>
+    <th style="min-width: 250px;">BUILDING</th>
+    <th style="min-width: 250px;">RMC/SITE PLANT</th>
+    <th style="min-width: 250px;">STRUCTURE</th>
+    <th style="min-width: 150px;">GRADE</th>
+    <th style="min-width: 250px;">CEMENT BRAND</th>
+    <th style="min-width: 130px;">3 DAYS</th>
+    <th style="min-width: 130px;">5 DAYS</th>
+    <th style="min-width: 130px;">7 DAYS</th>
+    <th style="min-width: 130px;">15 DAYS</th> 
+  </tr>
+  <% @grey_values.each_with_index do |value, index| %>
+    <tr class="grey-row">
+      <td><%= value.date %></td>
+      <td><%= value.project_master&.name %></td>
+      <td><%= value.building_master&.name %></td>
+      <td><%= value.rmc_list&.name %></td>
+      <td><%= value.structure_master&.name %></td>
+      <td><%= value.grade_master&.name %></td>
+      <td><%= value.cement&.brand %></td> 
+      <td style="padding: 8px; border-right: 1px solid #ccc;"><%= ([value.testing_results&.find_by(slot_type: '3 days', attempts: 0)&.result_value, value.testing_results&.find_by(slot_type: '3 days', attempts: 1)&.result_value, value.testing_results&.find_by(slot_type: '3 days', attempts: 2)&.result_value, value.testing_results&.find_by(slot_type: '3 days', attempts: 3)&.result_value].sum / 4.0).round rescue 'NA' %></td>
+      <td style="padding: 8px; border-right: 1px solid #ccc;"><%= ([value.testing_results&.find_by(slot_type: '5 days', attempts: 0)&.result_value, value.testing_results&.find_by(slot_type: '5 days', attempts: 1)&.result_value, value.testing_results&.find_by(slot_type: '5 days', attempts: 2)&.result_value, value.testing_results&.find_by(slot_type: '5 days', attempts: 3)&.result_value].sum / 4.0).round rescue 'NA' %></td>
+      <td style="padding: 8px; border-right: 1px solid #ccc;"><%= ([value.testing_results&.find_by(slot_type: '7 days', attempts: 0)&.result_value, value.testing_results&.find_by(slot_type: '7 days', attempts: 1)&.result_value, value.testing_results&.find_by(slot_type: '7 days', attempts: 2)&.result_value, value.testing_results&.find_by(slot_type: '7 days', attempts: 3)&.result_value].sum / 4.0).round rescue 'NA' %></td>
+      <td style="padding: 8px; border-right: 1px solid #ccc;"><%= ([value.testing_results&.find_by(slot_type: '15 days', attempts: 0)&.result_value, value.testing_results&.find_by(slot_type: '15 days', attempts: 1)&.result_value, value.testing_results&.find_by(slot_type: '15 days', attempts: 2)&.result_value, value.testing_results&.find_by(slot_type: '15 days', attempts: 3)&.result_value].sum / 4.0).round rescue 'NA' %></td>
+    </tr>
+  <% end %>
+</table>

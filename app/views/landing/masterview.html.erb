@@ -1,0 +1,325 @@
+<style>
+  .sec-heading{
+    font-size: 20px;
+    font-weight: 700;
+  }
+  img{
+    width: 102px !important;
+  }
+  .h-46{
+    height: 46% !important;
+  }
+  .w-48{
+    width: 48% !important;
+  }
+  .comparison-bg{
+    background-color: #C1C1FF;
+    border-radius: 10px;
+    padding: 4px 0px;
+  }
+  .comp-option{
+    font-size: 19px;
+    font-weight: 700;
+
+  }
+  .comp-heading{
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .comp-option-cont{
+    width: 155% !important;
+    padding-top: 31px;
+  }
+  .numbers{
+    background-color: #d4d4f3;
+  }
+  .icon-heading{
+    font-size: 18px;
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+     font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+   }
+  
+  .color-box {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+  }
+  
+  .green-box {
+    background-color: #42A85D;
+  }
+  
+  .red-box {
+    background-color: #E74C3C;
+  }
+  
+  .grey-box {
+    background-color: #95A5A6;
+  }
+  
+  .green {
+    color: #42A85D;
+  }
+  
+  .red {
+    color: #E74C3C;
+  }
+  
+  .grey {
+    color: #95A5A6;
+  }
+</style>   
+<div class="main-dashboard">
+    <div class="container-fluid p-3 pb-0 text-center col-lg" style="overflow-x: hidden;">
+      <div class="row">
+        <div class="col-lg-12 bg-white justify-content-center align-items-center rounded-3 filterBar mx-auto mt-4 text-dark text-center pt-3" style="width:84%;">
+          <h5 class="sec-heading text-center my-2">Comparison Graph</h5> 
+          <hr class="my-0">
+          <br>
+          <div class="row">
+            <div class="col-lg-2 row mx-auto justify-content-center align-items-center text-align: center">
+               <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+                <a href="" disabled>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("Cementwise.svg", alt: "Cement") %>
+                  </div>
+                </a>
+               <% else %>
+                  <%= link_to "/strength_graph?c_type=cement" do %>
+                    <div class="p-0">
+                      <%= image_tag("Cementwise.svg", alt: "Cement") %>
+                    </div>
+                  <% end %>
+               <% end %>
+              <h4 class="icon-heading" style=" text-align: center; margin-top: 10px;">Cement <br> wise</h4>
+            </div>
+            <div class="col-lg-2 row mx-auto justify-content-center align-items-center text-align: center">
+              <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+                <a href="" disabled>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("RMC0.svg", alt: "Cement") %>
+                  </div>
+                </a>
+              <% else %>
+                <%= link_to "/strength_graph?c_type=rmc" do %>
+                  <div class="p-0">
+                    <%= image_tag("RMC0.svg", alt: "Cement") %>
+                  </div>
+                <% end %>
+              <% end %>
+              <h4 class="icon-heading">RMC<br>wise</h4>
+            </div>
+            <div class="col-lg-2 row mx-auto justify-content-center align-items-center text-align: center">
+              <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+                <a href="" disabled>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("Fl yash0.svg", alt: "Cement") %>
+                  </div>
+                </a>
+              <% else %>
+                <%= link_to "/strength_graph?c_type=b1" do %>
+                  <div class="p-0">
+                    <%= image_tag("Fl yash0.svg", alt: "Cement") %>
+                  </div>
+                <% end %>
+              <% end %>
+              <h4 class="icon-heading">Binder 1 Flyash<br>wise</h4>
+            </div>
+         
+            <div class="col-lg-2 row mx-auto justify-content-center align-items-center text-align: center">
+              <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+                <a href="" disabled>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("Micro-Silica0.svg", alt: "Cement") %>
+                  </div>
+                </a>
+              <% else %>
+                <%= link_to "/strength_graph?c_type=b2" do %>
+                  <div class="p-0">
+                    <%= image_tag("Micro-Silica0.svg", alt: "Cement") %>
+                  </div>
+                <% end %>
+              <% end %>
+              <h4 class="icon-heading">Binder 2 Microsilica <br> wise</h4>
+            </div>
+            <div class="col-lg-2 row mx-auto justify-content-center align-items-center text-align: center">
+              <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+                <a href="" disabled>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("Superplasticizer0.svg", alt: "Cement") %>
+                  </div>
+                </a>
+              <% else %>
+                <%= link_to "/strength_graph?c_type=sp" do %>
+                  <div class="p-0">
+                    <%= image_tag("Superplasticizer0.svg", alt: "Cement") %>
+                  </div>
+                <% end %>
+              <% end %>
+              <h4 class="icon-heading" style="text-align: center; margin-top: 10px;">Super Plasticizer<br>wise</h4>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row container-fluid justify-content-center my-3 mx-auto" style="width: 100%">
+      <div class="col-md-5 mb-2 mx-2  bg-white rounded-3">
+       <h5 class="sec-heading text-center my-2">Report, Record & Graphs</h5> <hr class="my-0">
+        <div class="row w-100 my-2 justify-content-center  ">
+          <div class="col-md-4 text-center justify-content-center flex-column pt-4 rounded-3 mx-auto">
+           <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+              <a href="" disabled>
+                <div class="py-0 d-flex justify-content-center align-items-center">
+                  <%= image_tag("Overall failure0.svg", alt: "Cement") %>
+                </div>
+              </a>
+            <% else %>
+              <%= link_to "/overall_failure_report" do %>
+                <div class="p-0">
+                  <%= image_tag("Overall failure0.svg", alt: "Cement") %>
+                </div>
+              <% end %>
+            <% end %>
+            <h3 class="icon-heading">Over-all failure <br> Report</h3>
+          </div>
+           <div class="col-md-4 text-center justify-content-center flex-column pt-4 rounded-3 mx-auto">
+            <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+              <a href="" disabled>
+                <div class="py-0 d-flex justify-content-center align-items-center">
+                  <%= image_tag("High_grade.png", alt: "Cement") %>
+                </div>
+              </a>
+            <% else %>
+              <%= link_to "/last_30_days" do %>
+                <div class="p-0">
+                  <%= image_tag("High_grade.png", alt: "Cement") %>
+                </div>
+              <% end %>
+            <% end %>
+            <h3 class="icon-heading">High Strength <br> Concrete Record</h3>
+          </div>
+          <div class="col-md-4 text-center justify-content-center flex-column pt-4 rounded-3 mx-auto">
+            <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+              <a href="" disabled>
+                <div class="py-0 d-flex justify-content-center align-items-center">
+                  <%= image_tag("Concrete strength Graphs0.svg", alt: "Cement") %>
+                </div>
+              </a>
+            <% else %>
+              <%= link_to "/strength_graph" do %>
+                <div class="p-0">
+                  <%= image_tag("Concrete strength Graphs0.svg", alt: "Cement") %>
+                </div>
+              <% end %>
+            <% end %>
+            <h3 class="icon-heading">Concrete Strength <br> Graph</h3>
+          </div>
+        </div>
+        <div class="row w-100 my-2 justify-content-center">
+          <div class="col-md-4 text-center justify-content-center flex-column pt-4 rounded-3 mx-auto">
+            <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+              <a href="" disabled>
+                <div class="py-0 d-flex justify-content-center align-items-center">
+                  <%= image_tag("Standard Deviation0.svg", alt: "Cement") %>
+                </div>
+              </a>
+            <% else %>
+              <%= link_to "/standard_deviation" do %>
+                <div class="p-0">
+                  <%= image_tag("Standard Deviation0.svg", alt: "Cement") %>
+                </div>
+              <% end %>
+            <% end %>
+            <h3 class="icon-heading">Standard <br> Deviation</h3>
+          </div>
+          <div class="col-md-4 text-center justify-content-center flex-column pt-4 rounded-3 mx-auto">
+            <% if current_user.present? && current_user.lab_technician? || current_user.qa_lab_incharge?%>
+              <a href="" disabled>
+                <div class="py-0 d-flex justify-content-center align-items-center">
+                  <%= image_tag("bmc_tmc.png", alt: "Cement") %>
+                </div>
+              </a>
+            <% else %>
+              <%= link_to "/bmc_tmc_report" do %>
+                <div class="p-0">
+                  <%= image_tag("bmc_tmc.png", alt: "Cement") %>
+                </div>
+              <% end %>
+            <% end %>
+            <h3 class="icon-heading">BMC/TMC <br> Report </h3>
+          </div>
+          <div class="col-md-4 text-center justify-content-center flex-column pt-4 rounded-3 mx-auto">
+              <%= link_to "/drildown_strength_testing/project" do %>
+                <div class="p-0">
+                  <%= image_tag("Concrete Strength Cube Record0.svg", alt: "Cement") %>
+                </div>
+              <% end %>
+            <h3 class="icon-heading">Concrete Cube <br> Strength Record</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2 mb-2 mx-2 rounded-3 bg-white">
+        <div>
+          <h4 class="sec-heading text-center my-2 ">Casting & Testing</h4> <hr class="my-0">
+          <div class="col-md-5 py-4 w-48 text-center justify-content-evenly flex-column p-0 rounded-3 mx-auto">
+            <div class="pp">
+              <% if current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge? %>
+                <a href="" disabled>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("casting0.svg", alt: "Cement") %>
+                  </div>
+                </a>
+              <% else %>
+              <%= link_to "/strength_testings/new" do %>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("casting0.svg", alt: "Cement") %>
+                  </div>
+                <% end %>
+              <% end %>
+              <br>
+              <h3 class="icon-heading">Daily Casting</h3> 
+            </div>
+
+          </div>     
+          <div class="col-md-5 py-3 w-48 text-center justify-content-evenly flex-column p-0 rounded-3 mx-auto">
+            <div class="pp">
+                <% if current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge?  %>
+                <a href="" disabled>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("testing0.svg", alt: "Cement") %>
+                  </div>
+                </a>
+              <% else %>
+                <%= link_to "/daily_testing" do %>
+                  <div class="py-0 d-flex justify-content-center align-items-center">
+                    <%= image_tag("testing0.svg", alt: "Cement") %>
+                  </div>
+                <% end %>
+              <% end %> 
+              <br>
+              <h3 class="icon-heading">Daily Testing</h3> 
+            </div> 
+          </div>     
+          <br>
+        </div>
+      </div>
+      <div class="col-md-3 mb-2 mx-2 bg-white rounded-3">
+        <div class="bg-white">
+          <h5 class="sec-heading text-center my-2">Red, Grey & Green Zone</h5> <hr class="my-0">
+          <div class="py-5" style="height: 386px; width: 300px; display: block; margin: auto;"> 
+            <center> 
+            <canvas id="pie-chart" data-controller="doughnut" data-bardata="<%= @zone_data %>"></canvas>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

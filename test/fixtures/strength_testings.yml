@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  density: 1
+  remark: MyString
+
+two:
+  density: 1
+  remark: MyString

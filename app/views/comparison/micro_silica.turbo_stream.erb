@@ -1,0 +1,6 @@
+<div style="background-color: #F5F5F5; overflow-x: hidden;">
+  <%= render 'comparison/filterbar_b3' %>
+  <%= turbo_stream.replace "micro_silica_wise" do %>
+    <%= render 'comparison/micro_silica_comparison' %>  
+  <% end %>
+</div>

@@ -1,0 +1,2 @@
+class ZoneMaster < ApplicationRecord
+end

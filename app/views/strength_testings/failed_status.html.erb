@@ -1,0 +1,54 @@
+<style>
+  .button-pad {
+    padding: 15px;
+  }
+
+  .button-color {
+    background-color: #000000;
+    border: none;
+    color: white;
+  }
+
+  .button-color:hover {
+    background-color: #000000;
+    color: white;
+    border: none;
+  }
+
+  .containe {
+    height: 60vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+   .group-image {
+    text-align: center;
+  }
+
+  .data-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .traits{ 
+      background-color: #D9D9D9;
+      border: none;
+      color: black;
+ 
+  } 
+  @media (max-width: 390px) {
+    .containe {
+      height: 34vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>
+
+<!--% failiure report-->
+<div id="failedStatus" class="main-container">
+  <%= render 'strength_testings/high_grade_filter' %>
+  <%= render 'strength_testings/last_30_failed' %>
+</div>

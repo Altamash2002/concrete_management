@@ -1,0 +1,61 @@
+<div id="overall" class="main-container">
+    <div class="heading-container text-center text-md-start">
+        <h1 class="heading my-5 mx-5">
+            OVERALL FAILURE REPORT
+        </h1>
+    </div>
+    <div class="table-container mx-1 mx-md-5 overflow-auto"style=" border: 4px solid black;">
+        <table class="table table-responsive m-0">
+            <tr class="heading-row">
+                <th style="min-width: 250px;">DATE</th>
+                <th style="min-width: 250px;">PROJECT</th>
+                <th style="min-width: 250px;">BUILDING</th>
+                <th style="min-width: 250px;">RMC/SITE PLANT</th>
+                <th style="min-width: 250px;">STRUCTURE</th>
+                <th style="min-width: 150px;">GRADE</th>
+                <th style="min-width: 250px;">CEMENT BRAND</th>
+                <th style="min-width: 130px;">2 DAYS</th>
+                <th style="min-width: 130px;">3 DAYS</th>
+                <th style="min-width: 130px;">5 DAYS</th>
+                <th style="min-width: 130px;">7 DAYS</th>
+                <th style="min-width: 130px;">10 DAYS</th>
+                <th style="min-width: 130px;">14 DAYS</th>
+                <th style="min-width: 130px;">15 DAYS</th>
+                <th style="min-width: 130px;">28 DAYS</th>
+                <% if  current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge?   %>
+                  <% else %>
+                <th style="min-width: 130px;">EDIT</th>
+                <% end %>
+            </tr>
+            <% @overall_values.each_with_index do |value, index| %>
+              <tr class="overall-row">
+                <td><%= value.date&.strftime("%d-%m-%Y") %></td> 
+                <td><%= value.project_master&.name %></td>
+                <td><%= value.building_master&.name %></td>
+                <td><%= value.rmc_list&.name %></td>
+                <td><%= value.structure_master&.name %></td>
+                <td><%= value.grade_master&.name %></td>
+                <td><%= value.cement&.brand %></td>
+                <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '2 days', 0),value&.grade_master&.name, '2 days') %>"><%= calculate_average(value&.testing_results, '2 days', 0) %></td>
+                <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '3 days', 0),value&.grade_master&.name, '3 days') %>"><%= calculate_average(value&.testing_results, '3 days', 0) %></td>
+                <td style="color: <%= fs_calculate_color(calculate_average(value&.testing_results, '5 days', 0),value&.grade_master&.name, value&.structure_master&.name) %>"><%= calculate_average(value&.testing_results, '5 days', 0) %></td>
+                <td style="color: <%= fs_calculate_color(calculate_average(value&.testing_results, '7 days', 0),value&.grade_master&.name, value&.structure_master&.name) %>"><%= calculate_average(value&.testing_results, '7 days', 0) %></td>
+                <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '10 days', 0),value&.grade_master&.name, '10 days') %>"><%= calculate_average(value&.testing_results, '10 days', 0) %></td>
+                <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '14 days', 0),value&.grade_master&.name, '14 days') %>"><%= calculate_average(value&.testing_results, '14 days', 0) %></td>
+                <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '15 days', 0),value&.grade_master&.name, '15 days') %>"><%= calculate_average(value&.testing_results, '15 days', 0) %></td>
+                <td style="color: <%= calculate_color(calculate_average(value&.testing_results, '28 days', 0),value&.grade_master&.name, '28 days') %>"><%= calculate_average(value&.testing_results, '28 days', 0) %></td>
+                <% if  current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge?  %>
+                <% else %>
+                  <td class="show">
+                    <%= link_to "/strength_testings/#{value.id}/edit" do %>
+                      <span><i class="bi bi-pencil-fill"></i></span>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+        </table>
+    </div>
+       <div class="py-5"></div>
+    <lable></lable>
+</div>

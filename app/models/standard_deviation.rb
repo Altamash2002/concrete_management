@@ -1,0 +1,2 @@
+class StandardDeviation < ApplicationRecord
+end

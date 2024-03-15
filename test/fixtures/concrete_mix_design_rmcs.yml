@@ -1,0 +1,51 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_master: one
+  building_master: one
+  contractor_master: one
+  rmc_list: one
+  acceptance_strength: one
+  revision: MyString
+  grade_master: one
+  wb_ratio: 1.5
+  cement_content_kg_per_m3: 1.5
+  Binder1_FlyAsh_kg_per_m3: 1.5
+  third_binder: 1.5
+  water_in_ltrs_per_m3: 1.5
+  ca2_20mm_in_kg_per_m3: 1.5
+  ca1_10mm_in_kg_per_m3: 1.5
+  manufactured_sand_in_kg_per_m3: 1.5
+  wash_sand_in_kg_per_m3: 1.5
+  cement: one
+  superplasticizer: one
+  plasticizer_percent_wt_of_c_plus_f: 1.5
+  platicizer_in_kg_per_m3: 1.5
+  structure_master: one
+  date: 2023-06-07
+  remark: MyString
+
+two:
+  project_master: two
+  building_master: two
+  contractor_master: two
+  rmc_list: two
+  acceptance_strength: two
+  revision: MyString
+  grade_master: two
+  wb_ratio: 1.5
+  cement_content_kg_per_m3: 1.5
+  Binder1_FlyAsh_kg_per_m3: 1.5
+  third_binder: 1.5
+  water_in_ltrs_per_m3: 1.5
+  ca2_20mm_in_kg_per_m3: 1.5
+  ca1_10mm_in_kg_per_m3: 1.5
+  manufactured_sand_in_kg_per_m3: 1.5
+  wash_sand_in_kg_per_m3: 1.5
+  cement: two
+  superplasticizer: two
+  plasticizer_percent_wt_of_c_plus_f: 1.5
+  platicizer_in_kg_per_m3: 1.5
+  structure_master: two
+  date: 2023-06-07
+  remark: MyString

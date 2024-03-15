@@ -1,0 +1,6 @@
+<% @user = current_user %>
+<% if @user.present? %>
+  * User: <%= @user.name %> <%= @user.email %> (<%= @user.id %>)
+<% else %>
+  No User Found.
+<% end %>

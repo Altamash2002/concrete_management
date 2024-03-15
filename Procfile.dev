@@ -1,0 +1,4 @@
+web: unset PORT && bin/rails server
+fetch: bundle exec sidekiq
+js: yarn build --watch
+css: yarn build:css --watch

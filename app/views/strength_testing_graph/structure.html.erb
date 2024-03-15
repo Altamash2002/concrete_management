@@ -1,0 +1,9 @@
+<ul>
+    <% @structures.each do |structure| %>
+    <li><%= link_to structure.name, strength_graph_grade_path(building_id: params[:building_id], structure_id: structure.id) %></li>
+    <% end %>
+</ul>
+<script>
+ </script>
+
+ 

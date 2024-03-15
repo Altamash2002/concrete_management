@@ -1,0 +1,24 @@
+<!-- app/views/testing_results/all_testing_results.html.erb -->
+
+<h1>All Testing Results</h1>
+
+<table>
+  <thead>
+    <tr>
+       <th>Slot Type</th>
+      <th>Result Value</th>
+      <th>Cement Name</th> <!-- Add this column -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_testing_results.each do |testing_result| %>
+      <tr>
+         <td><%= testing_result.slot_type %></td>
+        <td><%= testing_result.result_value %></td>
+        <td><%= testing_result.strength_testing.cement&.brand %></td> <!-- Display the Cement name safely -->
+ 
+        <!-- Add more columns as needed -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

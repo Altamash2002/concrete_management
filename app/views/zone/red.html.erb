@@ -1,0 +1,202 @@
+
+<style>
+    .heading {
+        color: #ED2025;
+        border: 4px solid #ED2025;
+        background: #fff;
+        padding: 2px 10px;
+        width: fit-content;
+        font-size: 35px;
+    }
+    th, td {
+        color: #ED2025;
+    }
+    .heading-row{
+        background-color: #FFF0F1;
+    }
+    .red-row:nth-child(odd) {
+        background-color: #FFF0F1;
+    }
+    .red-row:nth-child(even) {
+        background-color: #FDCACA;
+    }
+    td {
+        text-align: center;
+        padding: 15px 0px !important;
+        font-size: 20px;
+        vertical-align: middle;
+    }
+    th {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 15px 0px !important;
+        vertical-align: middle;
+    }
+    .button {
+     display: flex;
+     justify-content: end;
+    }
+    .primary-btn{
+        border-radius: 10px;
+        border: 1px solid #000;
+        background: #FFF;
+        font-size: 18px;
+        padding: 4px 28px;
+        font-weight: 700;
+    }
+    .show{
+        color: #000;
+    }
+
+    #email-success-alert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    #form-row {
+  display: flex;
+  align-items: center;
+}
+
+</style>
+
+<div class="main-container">
+  <div class="heading-container text-center text-md-start">
+    <h1 class="heading mt-5 mb-2 mb-md-0 mx-5">
+      RED ZONE
+    </h1>
+  </div>
+    <div id="email-success-alert" class="alert alert-success" style="display: none;">
+    Email sent successfully! <i class="bi bi-check-circle-fill"></i>
+  </div>
+  <div class="main-container">
+    
+    <div class="mx-md-5 row justify-content-end">
+      <div class="col-md-2 form-group py-4" id="send-button">
+        <button id="sendMailButton" class="primary-btn">Send Via Mail</button>
+      </div>
+    </div> 
+    <div class="table-container mx-1 mx-md-5 overflow-auto" style=" border: 4px solid black;">
+      <table class="table table-responsive m-0">
+        <tr class="heading-row">
+        <th style="min-width: 250px;">SELECT</th>
+        <th style="min-width: 250px;">DATE</th>
+        <th style="min-width: 250px;">PROJECT</th>
+        <th style="min-width: 250px;">BUILDING</th>
+        <th style="min-width: 250px;">RMC/SITE PLANT</th>
+        <th style="min-width: 250px;">STRUCTURE</th>
+        <th style="min-width: 150px;">GRADE</th>
+        <th style="min-width: 250px;">CEMENT BRAND</th>
+        <th style="min-width: 130px;">28 DAYS</th>
+        <th style="min-width: 130px;">35 DAYS</th>
+        <th style="min-width: 130px;">45 DAYS</th>
+        <th style="min-width: 130px;">56 DAYS</th>
+        <th style="min-width: 130px;">90 DAYS</th>
+        <th style="min-width: 130px;">120 DAYS</th>
+        <th style="min-width: 130px;">Threshold</th>
+        <% if  current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge? %>
+          <% else %>
+        <th style="min-width: 130px;">EDIT</th>
+        <% end %> 
+
+        </tr>
+        <% @red_values.each_with_index do |value, index| %>
+          <tr class="red-row">
+            <td><input class="form-check-input" type="checkbox" name="selectedRows"></td> 
+            <td><%= value.date %></td>
+            <td><%= value.project_master&.name %></td>
+            <td><%= value.building_master&.name %></td>
+            <td><%= value.rmc_list&.name %></td>
+            <td><%= value.structure_master&.name %></td>
+            <td><%= value.grade_master&.name %></td>
+            <td><%= value.cement&.brand %></td>
+            <td><%= calculate_average(value&.testing_results, '28 days', 0) %></td>
+            <td><%= calculate_average(value&.testing_results, '35 days', 0) %></td>
+            <td><%= calculate_average(value&.testing_results, '45 days', 0) %></td>
+            <td><%= calculate_average(value&.testing_results, '56 days', 0) %></td>
+            <td><%= calculate_average(value&.testing_results, '90 days', 0) %></td>
+            <td><%= calculate_average(value&.testing_results, '120 days', 0) %></td>
+            <td><%= StrengthAcceptance.where(grade: value.grade_master&.name, day: '28 days').pluck(:value).first.to_i %></td>
+            <% if  current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.project_incharge?  %>
+            <% else %>
+              <td class="show">
+                <%= link_to "/strength_testings/#{value.id}/edit" do %>
+                  <span><i class="bi bi-pencil-fill"></i></span>
+                <% end %>
+            </td>
+            <% end %>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+  // JavaScript code to handle sending emails with selected rows
+  document.getElementById("sendMailButton").addEventListener("click", function() {
+    var selectedRows = document.getElementsByName("selectedRows");
+    var emailBody = "";
+    var selectedBuildingName = null; // Initialize the building name as null
+
+    for (var i = 0; i < selectedRows.length; i++) {
+      if (selectedRows[i].checked) {
+        var row = selectedRows[i].parentNode.parentNode;
+        var date = row.cells[1].innerText;
+        var project = row.cells[2].innerText;
+        var building = row.cells[3].innerText;
+        var rmc = row.cells[4].innerText;
+        var structure = row.cells[5].innerText;
+        var grade = row.cells[6].innerText;
+        var cement = row.cells[7].innerText;
+        var days28 = row.cells[8].innerText;
+        var days35 = row.cells[9].innerText;
+        var days45 = row.cells[10].innerText;
+        var days56 = row.cells[11].innerText;
+        var days90 = row.cells[12].innerText;
+        var days120 = row.cells[13].innerText;
+        var threshold = row.cells[14].innerText;
+
+        emailBody += "DATE:      " + date + "%0D%0A";
+        emailBody += "PROJECT:   " + project + "%0D%0A";
+        emailBody += "BUILDING:  " + building + "%0D%0A";
+        emailBody += "RMC:       " + rmc + "%0D%0A";
+        emailBody += "STRUCTURE: " + structure + "%0D%0A";
+        emailBody += "GRADE:     " + grade + "%0D%0A";
+        emailBody += "CEMENT:    " + cement + "%0D%0A";
+        emailBody += "28 DAYS:   " + days28 + "%0D%0A";
+        emailBody += "35 DAYS:   " + days35 + "%0D%0A";
+        emailBody += "45 DAYS:   " + days45 + "%0D%0A";
+        emailBody += "56 DAYS:   " + days56 + "%0D%0A";
+        emailBody += "90 DAYS:   " + days90 + "%0D%0A";
+        emailBody += "120 DAYS:  " + days120 + "%0D%0A";
+        emailBody += "Threshold:  " + threshold + "%0D%0A";
+
+        emailBody += "%0D%0A"; // add empty line between rows
+        emailBody += "%0D%0A"; // add empty line between rows
+
+        // Set the selected building name
+        if (selectedBuildingName === null) {
+          selectedBuildingName = building;
+        }
+      }
+    }
+
+    if (selectedBuildingName === null) {
+      alert("Please select at least one row.");
+    } else {
+      var emailSubject = "Red Zone Values";
+      sessionStorage.setItem('emailBody', emailBody);
+
+      // Generate mailto link
+      var emailLink = "mailto:?subject=" + emailSubject + "&body=[REPLACE_WITH_SESSION_STORAGE_KEY]";
+      emailLink = emailLink.replace('[REPLACE_WITH_SESSION_STORAGE_KEY]', String(sessionStorage.getItem('emailBody')));
+
+      console.log(String(sessionStorage.getItem('emailBody')))
+      window.open(emailLink, '_blank');
+    }
+  });
+</script>

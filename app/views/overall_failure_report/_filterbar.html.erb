@@ -1,0 +1,113 @@
+<style>  
+  @media only screen and (min-width:321px) and (max-width:568px) {
+    .s-label {
+      text-align: center !important;
+    }
+
+    .s-label select {
+
+      width: 100% !important;
+    }
+
+    .input {
+
+      width: 100% !important;
+    }
+
+    .text-m {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+</style>
+
+
+<div class="container-fluid p-3 pb-0text -center col-lg" style="overflow-x: hidden;">
+    <div class="row justify-content-center align-items-center rounded-3 filterBar mx-md-3 mt-md-4 text-dark text-center pt-3" data-controller='filter' style="background-color: white; box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);">
+        <div class="col-md-4 row justify-content-center align-items-end mb-4">
+            <div class="col-md-3">
+               <input class="form-check-input" type="checkbox" value="" id="date">
+                <label class="form-check-label fw-semibold" for="date">
+                   Date
+                </label>
+            </div>
+            <form class="col-md-4" action="">
+               <label class="From" for="from_date">From:</label>
+               <br />
+               <input class="input rounded w-100" type="date" id="from_date" name="from_date" max='<%= Date.current %>'
+               style="padding: 6px; ;background: whitesmoke; border: none;" data-path='<%= request.path %>' data-action="change->filter#setFilter" >
+            </form>
+     
+            <form class="col-md-4" action="">
+               <label class="From" for="to_date">To:</label>
+               <br />
+               <input class="input rounded w-100" type="date" id="to_date" name="to_date" max='<%= Date.current %>'
+                 style="padding: 6px; ;background: whitesmoke; border: none;" data-path='<%= request.path %>' data-action="change->filter#setFilter">
+            </form>
+        </div>
+        <div class="col-lg-3 row mx-auto justify-content-center align-items-center my-4 my-md-0">
+            <div class="col-md-5">
+                <input class="form-check-input" type="checkbox" id="structure">
+                <label class="form-check-label fw-semibold" for="structure">
+                Structure
+                </label>
+            </div>
+            <div class="s-label col-md-7" id="structure-input">
+                <%= select_tag "structure", options_for_select(@structures), multiple: true, include_blank: true, id: "structure_filters", class: "select2 rounded w-100", data: { path:  request.path , action: "change->filter#setFilter" } %>
+            </div>
+        </div>
+        <div class="col-lg-3 row mx-auto justify-content-center align-items-center my-4 my-md-0">
+            <div class="col-md-5">
+                <input class="form-check-input" type="checkbox" id="building">
+                <label class="form-check-label fw-semibold" for="building">
+                Building
+                </label>
+            </div>
+            <div class="dropdown  s-label col-md-7" id="building-input">
+                <%= select_tag "building", options_for_select(@buildings) , multiple: true, include_blank: true, id: 'building_filters' , class: "select2 rounded w-100", data: { path:  request.path , action: "change->filter#setFilter" }, disabled: true %>
+                <%# (as of now i user data column for drop dowm please change ) %>
+            </div>
+        </div>
+        <div class="col-lg-2 row mx-auto justify-content-center align-items-center my-4 my-md-0">
+            <div class="col-md-5">
+                <input class="form-check-input" type="checkbox" id="grade">
+                <label class="form-check-label fw-semibold" for="grade">
+                Grade
+                </label>
+            </div>
+            <div class="dropdown  s-label col-md-7" id="grade-input">
+                <%= select_tag "grade", options_for_select(@grades) , multiple: true, include_blank: true, id: 'grade_filters' , class: "select2 rounded w-100", data: { path:  request.path , action: "change->filter#setFilter" } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+  const fromDateFilter = document.getElementById('from_date');
+  const toDateFilter = document.getElementById('to_date');
+  const structureFilter = document.getElementById('structure_filters');
+  const gradeFilter = document.getElementById('grade_filters');
+
+  const buildingFilter = document.getElementById('building_filters');
+
+  fromDateFilter.addEventListener('change', enableBuildingFilter);
+  toDateFilter.addEventListener('change', enableBuildingFilter);
+  structureFilter.addEventListener('change', enableBuildingFilter);
+  gradeFilter.addEventListener('change', enableBuildingFilter);
+
+  function enableBuildingFilter() {
+    buildingFilter.disabled = false;
+    fromDateFilter.removeEventListener('change', enableBuildingFilter);
+    toDateFilter.removeEventListener('change', enableBuildingFilter);
+    structureFilter.removeEventListener('change', enableBuildingFilter);
+    gradeFilter.removeEventListener('change', enableBuildingFilter);
+  }
+
+</script>
+
+
+
+
+

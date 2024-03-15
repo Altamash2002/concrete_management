@@ -1,0 +1,2 @@
+class RmcList < ApplicationRecord
+end

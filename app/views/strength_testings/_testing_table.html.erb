@@ -1,0 +1,31 @@
+<div id="daily_testing"> 
+    <div class="scrollable-container">
+        <h1 class="centered-heading text-center my-4">Daily Testing</h1>
+        <div class="row container-fluid">
+            <% if current_user&.admin_or_supervisor_or_main_lab_incharge? || current_user.lab_technician? || current_user.qa_lab_incharge? %>
+                <% if params[:show_all].present? and params[:show_all] == 'true' %>
+                    <%= link_to "Show Today's", '/daily_testing', style: 'text-align: center;' 'width: max-content;', class: 'text-right mx-auto' %>
+                <% else %>
+                    <%= link_to "Show All", '/daily_testing?show_all=true', style: 'text-align: center;' 'width: max-content;', class: 'text-right mx-auto' %>
+                <% end %>
+            <% else %>
+                <% if params[:show_all].present? and params[:show_all] == 'true' %>
+                    <%= link_to "Show Today's", '/daily_testing', style: 'text-align: center;' 'width: max-content;', class: 'text-right mx-auto' %>
+                <% else %>
+                    <%= link_to "Show All", '/daily_testing?show_all=true', style: 'text-align: center;' 'width: max-content;', class: 'text-right mx-auto' %>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+    <div class="table-content mt-5">
+        <div id="scrollable-daily-testings" class="mx-1 mx-md-4 p-md-2">
+            <% @strength_testings.each do |st| %>
+                <%= render partial: 'daily_testing_single_record', locals: {st: st}%>
+            <% end %>
+            <% if params[:show_all].present? and params[:show_all] == 'true' %>
+                <%= render partial: "daily_testing_next_page" %>
+            <% end %>
+        </div>
+    </div>
+
+</div>

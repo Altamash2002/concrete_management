@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PowerGeneratorDashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+    <style>
+      .alert {
+        position: fixed !important;
+        width: 90% !important;
+        top: 1rem;
+        left: 1rem;
+        z-index: 999999999999999999;
+      }
+      @media(min-width: 650px){
+        .alert{
+          width: 50% !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <% if notice.present? %>
+      <div
+          id="alert"
+          class="alert alert-success alert-dismissible fade show"
+          role="alert">
+        <%= notice %>
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close" ></button>
+      </div>
+    <% end %>
+    <% if alert.present? %>
+      <div
+        id="alert"
+        class="alert alert-danger alert-dismissible fade show"
+        role="alert">
+        <%= alert %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    <% end %>
+    <div class="container-fluid p-3 text-center" style="overflow-x: hidden;">
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+class GreyMailer < ApplicationMailer
+end

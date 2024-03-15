@@ -1,0 +1,9 @@
+
+ <tr>
+  <td class="main-tbl-td"><%= defined?(cement_brand) ? cement_brand : "NA" %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(averages_by_day['3 days'], defined?(cement_brand) ? cement_brand : "NA", '3 days') %>"><%= averages_by_day['3 days'] %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(averages_by_day['10 days'], defined?(cement_brand) ? cement_brand : "NA", '10 days') %>"><%= averages_by_day['10 days'] %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(averages_by_day['14 days'], defined?(cement_brand) ? cement_brand : "NA", '14 days') %>"><%= averages_by_day['14 days'] %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(averages_by_day['15 days'], defined?(cement_brand) ? cement_brand : "NA", '15 days') %>"><%= averages_by_day['15 days'] %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(averages_by_day['28 days'], defined?(cement_brand) ? cement_brand : "NA", '28 days') %>"><%= averages_by_day['28 days'] %></td>
+</tr>

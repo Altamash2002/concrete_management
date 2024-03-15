@@ -1,0 +1,6 @@
+<div style="background-color: #F5F5F5; overflow-x: hidden;">
+  <%= render 'comparison/filterbar_rmc' %>
+  <%= turbo_stream.replace "rmc_concrete_wise" do %>
+    <%= render 'comparison/rmc_concrete_comparison' %> 
+  <% end %>
+</div>

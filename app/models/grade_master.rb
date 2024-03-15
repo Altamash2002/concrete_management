@@ -1,0 +1,2 @@
+class GradeMaster < ApplicationRecord
+end

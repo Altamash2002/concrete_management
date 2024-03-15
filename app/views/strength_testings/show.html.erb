@@ -1,0 +1,35 @@
+<p style="color: green" class="alert"><%= notice %></p>
+
+<%= render @strength_testing %>
+
+<div class = "my-4 mx-auto px-3 row container-fluid justify-content-center">
+  <%= link_to "Edit this strength testing", edit_strength_testing_path(@strength_testing, daily_casting: true), class: "mx-5 my-3 col-sm-2 btn btn-primary" %>
+  <button class="mx-5 my-3 col-sm-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Update Day Testing Result</button>
+  <%= link_to "Back to strength testings", strength_testings_path, class: "mx-5 my-3 col-sm-2 btn btn-secondary" %>
+</div>
+<div class="mb-5 mx-auto px-3 row container-fluid justify-content-center">
+  <%= link_to "Destroy this strength testing", @strength_testing , method: :delete, data: { confirm: 'Are you sure?' }, class: "mx-5 my-3 col-sm-2 btn btn-danger" %>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select a Day</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="mb-3 text-center">
+          <% if @strength_testing && @strength_testing.structure_master %>
+            <% @strength_testing.structure_master.acceptance_strengths.each do |testing_day| %>
+              <a href="<%= edit_testing_results_path(id: @strength_testing.id, day: testing_day.title) %>" class="btn btn-primary mb-2"><%= testing_day.title %></a>
+              <br>
+            <% end %>
+          <% end %>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

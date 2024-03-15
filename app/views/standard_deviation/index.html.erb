@@ -1,0 +1,60 @@
+ 
+
+<style>
+  .drill-bg{
+    background-color: #115679;
+    border-radius: 10px;
+    height: 120px;
+    vertical-align: center;
+  }
+  .heading-div{
+    text-align: center;
+    background-color: #115679;
+    color: white;
+    padding: 5px 40px;
+  }
+  .comp-heading{
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .center{
+        padding-top: 50px;
+  }
+  .color-text{
+    color: black;
+  }
+   .previous-link{
+    color: blue;
+  }
+</style>
+<div>
+  <div class="container-fluid pt-5 pb-2 d-flex justify-content-center align-items-center">
+    <div class="rounded-3 shadow" style="width:80%; height: 319px; object-fit: cover;background: url(<%= asset_path 'structure1.jpg' %>);background-size: cover;background-position: 9% 100%;">
+      <div class="row align-items-center h-100">
+        <div class="col-md-12">
+          <h2 class="mx-auto text-center bg-white rounded-3 p-3" style="width: fit-content">Buildings</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid"style="width: 80%;">
+    <div class="row p-0 mx-auto my-5 container-fluid justify-content-center">
+      <% @buildings.each do |building| %>
+        <div class="col-md-4 col-sm-6 py-2">
+          <div class="card shadow">
+            <div class="card-body d-flex align-items-center" style="padding-top: 25px; padding-bottom: 25px;">
+              <img src="<%= asset_path 'Building0.svg' %>" alt="Project Image" class="img-fluid me-3" style="max-width: 70px;">
+              <%= link_to standard_deviation_grade_path(building_id: building.id, building_name: building.name), class: "text-decoration-none card-body d-flex align-items-center color-text" do %>
+                <span class="names">
+                  <h5><%= building.name %></h5>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div> 
+</div> 
+

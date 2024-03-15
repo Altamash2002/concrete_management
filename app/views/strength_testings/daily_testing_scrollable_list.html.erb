@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "daily-testing-page-#{@pagy.page}" do %>
+  <%= turbo_stream.append "scrollable-daily-testings" do %>
+    <% @strength_testings.each do |st| %>
+      <%= render partial: "daily_testing_single_record", locals: {st: st} %>
+    <% end %>
+    <%= render partial: "daily_testing_next_page" %>
+  <% end %>
+<% end %>
+

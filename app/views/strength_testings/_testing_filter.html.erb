@@ -1,0 +1,56 @@
+<style>  
+  @media only screen and (min-width:321px) and (max-width:568px) {
+    .s-label {
+      text-align: center !important;
+    }
+
+    .s-label select {
+
+      width: 100% !important;
+    }
+
+    .input {
+
+      width: 100% !important;
+    }
+
+    .text-m {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+</style>
+
+
+<div class="container-fluid p-3 pb-0text -center col-lg" style="overflow-x: hidden;">
+    <div class="row justify-content-center align-items-center rounded-3 filterBar mx-md-3 mt-md-4 text-dark text-center pt-3" style="background-color: white; box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);">
+        <div class="col-md-6 row justify-content-center align-items-end mb-4">
+          <div class="col-md-5">
+              <input class="form-check-input" type="checkbox" id="building">
+              <label class="form-check-label fw-semibold" for="building">
+              Building
+              </label>
+          </div>
+          <div class="dropdown  s-label col-md-7" id="building-input">
+          <% if current_user.lab_technician? || current_user.qa_lab_incharge? %>
+            <%= select_tag "building", options_for_select(current_user.building_masters.pluck(:name)), multiple: true, include_blank: true, id: 'building_filters', class: "select2 rounded w-100", data: { controller: "filter", path: request.path, action: "change->filter#setFilter" } %>
+          <% else %>  
+            <%= select_tag "building", options_for_select(@buildings) , multiple: true, include_blank: true, id: 'building_filters' , class: "select2 rounded w-100", data: { controller: "filter", path:  request.path , action: "change->filter#setFilter" } %>
+          <% end %>
+           </div> 
+        </div>
+        <div class="col-md-6 row justify-content-center align-items-end mb-4">
+          <div class="col-md-5">
+               <input class="form-check-input" type="checkbox" id="onedate">
+              <label class="form-check-label fw-semibold" for="onedate">
+              Casting Date
+              </label>
+          </div>
+            <div class="dropdown  s-label col-md-7" id="onedate-input">
+                <%= select_tag "onedate", options_for_select(@onedates) , multiple: true, include_blank: true, id: 'onedate_filters' , class: "select2 rounded w-100", data: { controller: "filter", path:  request.path , action: "change->filter#setFilter" } %>
+             </div> 
+        </div> 
+    </div>
+</div>
+

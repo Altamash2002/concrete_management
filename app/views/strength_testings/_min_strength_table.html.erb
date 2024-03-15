@@ -1,0 +1,204 @@
+<style>
+  .button-pad {
+    padding: 15px;
+  }
+
+  .button-color {
+    background-color: #000000;
+    border: none;
+    color: white;
+  }
+
+  .button-color:hover {
+    background-color: #000000;
+    color: white;
+    border: none;
+  }
+
+  .containe {
+    height: 60vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+   .group-image {
+    text-align: center;
+  }
+
+  .data-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .traits{ 
+      background-color: #D9D9D9;
+      border: none;
+      color: black;
+ 
+  } 
+  @media (max-width: 390px) {
+    .containe {
+      height: 34vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>
+<!-- Threshold  -->
+<div id="high_grade_table"> 
+  <div class="scrollable-container">
+    <h1 class="centered-heading text-center my-4">Latest 30 Days Result</h1>
+  </div>
+  <div class="d-flex justify-content-center py-2">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/last_30_days" class="btn btn-secondary font-weight-bold button-color ", style= "width:120px" >Record</a>
+      <a href="/failed_status" class="btn btn-secondary font-weight-bold traits", style= "width:120px" >Analytics</a>
+    </div>
+  </div> 
+  
+
+    <div class="table-content">
+      <div class="overflow-auto my-5">
+        <table class="table table-responsive rounded-3 table-bordered" id="table-list">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @strength_acceptances.each do |acceptance| %>
+              <tr>
+                <td><%= acceptance.day %></td>
+                <td><%= acceptance.value %></td> 
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>  
+
+    
+
+
+    <!--Latest 30 days result-->
+    <div class="table-content">
+      <div class="overflow-auto">
+        <table class="table table-responsive rounded-3 table-bordered" id="table-list">
+          <thead>
+            <th class="main-tbl-th" style="min-width: 250px;">Cement Brand</th>
+            <th class="main-tbl-th" style="min-width: 80px;">3 days</th>
+            <th class="main-tbl-th" style="min-width: 80px;">10 days</th>
+            <th class="main-tbl-th" style="min-width: 80px;">14 days</th>
+            <th class="main-tbl-th" style="min-width: 80px;">15 days</th>
+            <th class="main-tbl-th" style="min-width: 80px;">28 days</th> 
+          </thead>
+
+          <tbody id="table-list-body">
+            <% @cement_averages.each do |cement_brand,  averages_by_day| %>
+              <%= render partial: "min_strength_testing_row", locals: { cement_brand: cement_brand, averages_by_day: averages_by_day } %>
+            <% end %>
+            
+          </tbody>
+        </table>
+      </div>
+      <br>
+    </div>
+    <div class="row mb-5 container-fluid justify-content-center mx-0 px-0">
+      <button class="col-3 btn btn-lg btn-success" type="button" onclick="tableToCSV()">
+        <%= 'DOWNLOAD CSV' %> <span> &nbsp;&nbsp;&nbsp;<i class="bi bi-download"></i></span>
+      </button>
+    </div>
+</div>
+
+<script>
+  function tableToCSV() {
+    // Variable to store the final csv data
+    var csv_data = [];
+    // Get each row data
+    var headers = document.getElementsByTagName('thead');
+    for (var i = 0; i < headers.length; i++) {
+      // Get each column data
+      var cols = headers[i].querySelectorAll('th.main-tbl-th');
+      // Stores each csv row data
+      var csvrow = [];
+      for (var j = 0; j < cols.length; j++) {
+          // Get the text data of each cell
+          // of a row and push it to csvrow
+          csvrow.push(cols[j].innerHTML);
+      }
+      // Combine each column value with comma
+      if(csvrow.length > 0) {
+        csv_data.push(csvrow.join(","));
+      }
+    }
+
+    console.log(csv_data);
+    var tbody = document.getElementById('table-list-body');
+
+    var rows = document.querySelectorAll('#table-list-body > tr');
+    for (var i = 0; i < rows.length; i++) {
+      // Get each column data
+      var cols = rows[i].querySelectorAll('td.main-tbl-td');
+      // Stores each csv row data
+      var csvrow = [];
+      for (var j = 0; j < cols.length; j++) {
+          // Get the text data of each cell
+          // of a row and push it to csvrow
+          var text = cols[j].textContent;
+          text = text.replace(/(\r\n|\n|\r)/gm, "");
+          csvrow.push(text);
+      }
+      console.log(csvrow);
+      // Combine each column value with comma
+      if(csvrow.length > 0) {
+        csv_data.push(csvrow.join(","));
+      }
+    }
+    // Combine each row data with new line character
+    csv_data = csv_data.join('\n');
+    // Call this function to download csv file 
+    downloadCSVFile(csv_data);
+  }
+ 
+  function downloadCSVFile(csv_data) {
+    
+
+      // Create CSV file object and feed
+      // our csv_data into it
+      CSVFile = new Blob([csv_data], {
+          type: "text/csv"
+      });
+
+      // Create to temporary link to initiate
+      // download process
+      var temp_link = document.createElement('a');
+
+      // Download csv file
+      temp_link.download = `report_${new Date().toDateString().toLowerCase().replaceAll(' ', '_')}.csv`;
+      var url = window.URL.createObjectURL(CSVFile);
+      temp_link.href = url;
+
+      // This link should not be displayed
+      temp_link.style.display = "none";
+      document.body.appendChild(temp_link);
+
+      // Automatically click the link to
+      // trigger download
+      temp_link.click();
+      document.body.removeChild(temp_link);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#table-list11', {
+      'paging': false,
+      'ordering': false,
+      'scrollY': 1500,
+      'scrollX': true,
+      'buttons': [
+        'csv'
+      ]
+    });
+  });
+</script>

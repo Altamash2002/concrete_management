@@ -1,0 +1,11 @@
+<% if @pagy&.next.present? %>
+  <%= turbo_frame_tag(
+        "strength-testings-page-#{@pagy.next}",
+        # autoscroll: true,
+        loading: :lazy,
+        src: pagy_url_for(@pagy, @pagy.next),
+        target: "_top"
+      ) do %>
+        <span style="font-size: 24px;">Loading...</span> 
+  <% end %>
+<% end %>

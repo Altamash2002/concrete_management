@@ -1,0 +1,64 @@
+<!-- css  -->
+<style>
+  .table-content {
+    margin: 0px 2% 50px 2%;
+    text-align: center;
+  }
+  th , td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .main-container{
+    background-color: whitesmoke;
+  }
+  .table{
+    background-color: white;
+  }
+  #table-list{
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  }
+  .avg{
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .project{
+    font-size: 16px; 
+    font-weight: bold;
+  }
+  .privious-link{
+    color: #565A8E;
+  }
+</style>
+ <div class="main-container">
+   <%= render 'strength_testings/strength_filter' %>
+  <div class="">
+    <div class="col-md-5">
+      <div class="row">
+        <% if params[:project_id] %>
+          <div class="col-md-2 privious-link">
+            <%= link_to "/drildown_strength_testing/project", class: "dropdown-item child row align-items-center container-fluid m-0" do %>
+              <span class="project">PROJECTS ></span>
+            <% end %>
+          </div>
+        <% end %>
+        <% if params[:building_id] %>
+          <div class="col-md-2 privious-link">
+            <%= link_to drildown_strength_testing_building_path(project_id: params[:project_id]), class: "dropdown-item child row align-items-center container-fluid m-0" do %>
+              <span class="project">BUILDINGS ></span>
+            <% end %>
+          </div>
+        <% end %>
+        <% if params[:grade_id] %>
+          <div class="col-md-2 privious-link">
+            <%= link_to drildown_strength_testing_grade_path(building_id: params[:building_id]), class: "dropdown-item child row align-items-center container-fluid m-0" do %>
+              <span class="project"> GRADE ></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'strength_testings/strength_table' %>
+</div>
+

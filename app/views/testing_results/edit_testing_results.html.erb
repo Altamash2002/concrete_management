@@ -1,0 +1,175 @@
+<style>
+  select{
+    width: 100%;
+    height: 100%;
+  }
+  select,input{
+    border: 1px solid black;
+  }
+</style>
+<div class="container form-container px-5 px-md-0">
+<%= form_with(model: @strength_testing) do |f| %>
+  <% if @daily_testing %>
+    <div id="testingExtra" style="display: none;">
+      <% if @strength_testing.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@strength_testing.errors.count, "error") %> prohibited this strength_testing from being saved:</h2>
+
+          <ul>
+            <% @strength_testing.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :project_master_id, class: "label col-md-2 m-1 text-md-end mx-auto" %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :project_master_id, options_from_collection_for_select(ProjectMaster.all, 'id', 'name', @strength_testing.project_master_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :date, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.date_field :date, class: 'col-md-10 mx-auto' %>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :rmc_list_id, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+            <%= f.select :rmc_list_id, options_from_collection_for_select(RmcList.all, 'id', 'name',@strength_testing.rmc_list_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :building, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :building_master_id, options_from_collection_for_select(BuildingMaster.all, 'id', 'name', @strength_testing.building_master_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :structure_master_id, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :structure_master_id, options_from_collection_for_select(StructureMaster.all, 'id', 'name', @strength_testing.structure_master_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :grade_master_id, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :grade_master_id, options_from_collection_for_select(GradeMaster.all, 'id', 'name', @strength_testing.grade_master_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+      <%= f.label :w_b_ratio, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+      <%= f.text_field :w_b_ratio, class: 'col-md-10 mx-auto' %>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :cement_id, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :cement_id, options_from_collection_for_select(Cement.all, 'id', 'brand', @strength_testing.cement_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+      <%= f.label :cement_c_c_kg_m3, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+      <%= f.text_field :cement_c_c_kg_m3, class: 'col-md-10 mx-auto' %>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :s_plasticizer_id, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :s_plasticizer_id, options_from_collection_for_select(Superplasticizer.all, 'id', 'brand', @strength_testing.s_plasticizer_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :s_plasticizer_dosage, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <%= f.text_field :s_plasticizer_dosage, class: 'col-md-10 mx-auto' %>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :m_admixture_id, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :m_admixture_id, options_from_collection_for_select(MAdmixture.all, 'id', 'brand', @strength_testing.m_admixture_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+      <%= f.label :m_admixture_dosage, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+      <%= f.text_field :m_admixture_dosage, class: 'col-md-10 mx-auto' %>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+        <%= f.label :m_silica_id, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+        <div class="col-md-10 mx-auto p-0">
+          <%= f.select :m_silica_id, options_from_collection_for_select(MSilica.all, 'id', 'brand', @strength_testing.m_silica_id), class: "form-select" %>
+        </div>
+      </div>
+
+      <div class="my-2 inputs row justify-content-center">
+      <%= f.label :m_silica_dosage, class: 'label col-md-2 m-1 text-md-end mx-auto' %>
+      <%= f.text_field :m_silica_dosage, class: 'col-md-10 mx-auto' %>
+      </div>
+    </div>
+    <div class="show-more-btn-div text-center my-5">
+      <button id="showMoreButton" type="button" class="btn btn-secondary">Show More</button>
+    </div>
+
+    <div class="row container justify-content-start my-5">
+      <div class="col-md-2 mx-1"><h5>Sr.No : <%= @strength_testing.id %>  </h5></div>
+      <div class="col-md-2 mx-3"><h5>Date : <%= @strength_testing.date&.strftime("%d-%m-%Y") %></h5></div>
+    </div>
+
+    <% id = 0 %>
+    <% @strength_testing.testing_results.where(slot_type: @day).group_by{|i| i.slot_type}.each_with_index do |slots, index| %>
+      <% slot_type, slot_attempts = slots[0], slots[1] %>
+      <div class="my-2 inputs row justify-content-center">
+        <h4 class='label col-md-12 m-1 mx-auto text-center'><%= "Update #{slot_type} Testing Results" %></h4>
+        <% slot_attempts.each_with_index do |attempt, inner_index| %>
+          <div class="col-md-3"><%= "Attempt #{attempt.attempts}" %></div>
+          <div class="col-md-8 m-0 p-0 my-md-0 my-1 pe-md-1">
+              <%# id = (index + 1) * (inner_index + 1) -1%>
+              <input type="hidden" value='<%= attempt.id %>' name=<%= "strength_testing[testing_results_attributes][#{id}][id]" %> id= <%= "strength_testing_testing_results_attributes_#{id}_id"%>>
+              <input type="hidden" value='<%= attempt.attempts %>' name=<%= "strength_testing[testing_results_attributes][#{id}][attempts]" %> id= <%= "strength_testing_testing_results_attributes_#{id}_attempts"%>>
+              <input type="hidden" value='<%= slot_type %>' name=<%= "strength_testing[testing_results_attributes][#{id}][slot_type]" %> id= <%= "strength_testing_testing_results_attributes_#{id}_slot_type"%>>
+              <input class="w-100 h-100" placeholder="attempt" type="text" value='<%= attempt&.result_value || 0 %>' name=<%= "strength_testing[testing_results_attributes][#{id}][result_value]" %> id= <%= "strength_testing_testing_results_attributes_#{id}_result_value"%>>
+              <input type="hidden" name=<%= "strength_testing[testing_results_attributes][#{id}][user_id]" %> value='<%= current_user&.id %>'>
+          </div>
+          <br><br>
+          <% id = id + 1%>
+        <% end %>
+
+        <!-- <div class="col-md-2 m-0 p-0 my-md-0 my-1 ps-md-1">
+            <%= f.text_field :'28days_average', class: 'avg w-100 h-100', placeholder: 'average' %>
+        </div> -->
+      </div>
+    <% end %>
+
+  <% end %>
+ <div class="my-5 inputs row justify-content-center">
+    <%= f.submit "Save", class: "col-sm-2 mx-3 col-4 btn btn-success" %>
+    <button class="col-sm-2 mx-3 col-4 btn btn-dark">
+      Cancel
+    </button>
+  </div>
+<% end %>
+</div>
+
+<script>
+  var testingExtra = document.getElementById("testingExtra");
+  var showMoreButton = document.getElementById("showMoreButton");
+
+  showMoreButton.addEventListener("click", function() {
+    if (testingExtra.style.display === "none") {
+      testingExtra.style.display = "block";
+      showMoreButton.textContent = "Show Less";
+    } else {
+      testingExtra.style.display = "none";
+      showMoreButton.textContent = "Show More";
+    }
+  });
+</script>

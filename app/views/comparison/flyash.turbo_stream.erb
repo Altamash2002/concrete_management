@@ -1,0 +1,6 @@
+<div style="background-color: #F5F5F5; overflow-x: hidden;">
+  <%= render 'comparison/filterbar_b1' %>
+  <%= turbo_stream.replace "flyash_wise" do %>
+    <%= render 'comparison/flyash_comparison' %>  
+  <% end %>
+</div>

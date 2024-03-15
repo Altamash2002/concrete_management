@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grade_master: one
+  strength_at_70p: 1
+  strength_at_75p: 1
+
+two:
+  grade_master: two
+  strength_at_70p: 1
+  strength_at_75p: 1

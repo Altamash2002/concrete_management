@@ -1,0 +1,11 @@
+ <div class="container justify-content-center py-4">
+  <center>
+    <div class="card" style="width: 18rem;">
+     <ul class="list-group list-group-flush">
+        <% @buildings.each do |building| %> 
+            <li class="list-group-item"><%= link_to building.name, strength_graph_structure_path(building_id: building.id)  %></li>
+        <% end %>
+     </ul>
+    </div>
+    </center>
+  </div>  

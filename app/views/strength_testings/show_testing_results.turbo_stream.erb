@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "test-results-#{@strength_testing.id}" do %>
+  <%= render partial: "daily_testing_testing_results", locals: {st: @strength_testing} %>
+<% end %>

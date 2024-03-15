@@ -1,0 +1,12 @@
+<%= turbo_stream.append "table-list-body" do %>
+  <%#= render partial: "comment", collection: @strength_testings %>
+  <% @strength_testings.each do |st| %>
+    <%= render partial: "strength_testing_row", locals: {st: st} %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "next_link" do %>
+  <% if @pagy.next.present? %>
+    <%= button_to "Load More", pagy_url_for(@pagy, @pagy.next) %>
+  <% end %>
+<% end %>

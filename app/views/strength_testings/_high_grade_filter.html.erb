@@ -1,0 +1,53 @@
+<style>
+  @media only screen and (min-width:321px) and (max-width:568px) {
+    .s-label {
+      text-align: center !important;
+    }
+
+    .s-label select {
+
+      width: 100% !important;
+    }
+
+    .input {
+
+      width: 100% !important;
+    }
+
+    .text-m {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+</style>
+
+<div class="container-fluid p-3 pb-0 text-center col-lg " style="overflow-x: hidden;">
+  <div class="row mx-auto justify-content-center rounded-3 filterBar text-dark text-center pt-3 pb-4" style="background-color: white;" data-controller='filter' data-path="<%= request.path %>">
+    
+    <div class="col-md-4 my-2 row justify-content-center align-items-center">
+      <div class="col-md-5">
+        <input class="form-check-input" type="checkbox" value="" id="concrete1">
+          <label class="form-check-label fw-semibold" for="concrete1">
+            Building
+          </label>
+      </div>
+      <div class="dropdown s-label col-md-7" id="concrete-input">
+        <%= select_tag "building", options_for_select(@buildings) , multiple: true, id: 'building_filters', include_blank: true , class: "select2 rounded w-100", data: { action: "change->filter#setFilter" , path: request.path } %>
+      </div>
+    </div> 
+
+    <div class="col-md-3 mt-4 mb-2 row justify-content-center align-items-center">
+      <div class="col-md-5">
+      <input class="form-check-input" type="checkbox" value="" id="concrete2">
+          <label class="form-check-label fw-semibold" for="concrete2">
+              Grade
+          </label>
+      </div>
+      <div class="dropdown s-label col-md-7" id="concrete-input">
+          <%= select_tag "grade", options_for_select(@grades) , multiple: true, id: 'grade_filters', include_blank: true , class: "select2 rounded w-100", data: { action: "change->filter#setFilter" , path: request.path } %>
+      </div>
+    </div>
+
+  </div>
+</div>

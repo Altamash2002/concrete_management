@@ -1,0 +1,14 @@
+<% st&.testing_results.where(enable: true)&.order(:created_at).group_by{|i| i.slot_type}.each do |slot_type, slot_attempts| %>
+  <tr>
+    <th><%=slot_type%></th>
+    <td style="min-width: 130px; text-align: center;"><%= get_result_value(st&.testing_results, slot_type, 0) %></td>
+    <td style="min-width: 130px;"><%= get_result_value(st&.testing_results, slot_type, 1) %></td>
+    <td style="min-width: 130px;"><%= get_result_value(st&.testing_results, slot_type, 2) %></td>
+    <td style="min-width: 130px;"><%= get_result_value(st&.testing_results, slot_type, 3) %></td>
+    <th style="min-width: 130px;"><%= calculate_average(st&.testing_results, slot_type, 0) %></th>
+    <th style="min-width: 130px;"><%= st&.testing_results.includes(:user).find_by(slot_type: slot_type)&.user&.email %></th>
+  </tr>
+<% end %> 
+
+
+ 

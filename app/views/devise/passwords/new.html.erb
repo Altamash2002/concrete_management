@@ -1,0 +1,60 @@
+<style>
+    input {
+        outline: none;
+    }
+
+    body {
+        background-color: whitesmoke;
+    }
+
+    .container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 15px gray;
+
+    }
+
+    .input {
+        width: 100%;
+        height: 50px;
+        background-color: whitesmoke;
+        border-radius: 7px;
+        border: none;
+        border: 1px solid grey;
+    }
+
+    .label {
+        font-size: 20px;
+    }
+
+    #button {
+        border-radius: 7px;
+        height: 45px;
+        width: 55%;
+    }
+</style>
+
+<div class="container col-lg-4 col-11 py-5 px-5 my-5">
+    <div>
+        <h1 class="text-center">Forgot Your Password?</h1>
+    </div>
+    <br>
+    <div class="my-3">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="my-2">
+            <label class="label" for="">Enter Email ID</label>
+            <br>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input ps-2" %>
+        </div>
+        <br>
+        <div class="text-center mb-4">
+          <%= f.submit "Send me reset password instructions", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <div class="text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+</div>
+

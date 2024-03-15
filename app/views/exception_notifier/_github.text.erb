@@ -1,0 +1,6 @@
+<% #TODO maybe we can point to the file at the actual deployed commit (instead of just at the branch), that might be nice to have %>
+<% #http://stackoverflow.com/questions/119286/catching-line-numbers-in-ruby-exceptions %>
+<% @file = (@backtrace.first.match(/^(.+?):(\d+)(|:in `(.+)')$/); $1 + '#L' + $2) if @backtrace.present? %>
+* File    : https://github.com/ssingularitytech/power_generator_dashboard/blob/main/<%= @file %>
+* Blame   : https://github.com/ssingularitytech/power_generator_dashboard/blob/main/<%= @file %>
+* History : https://github.com/ssingularitytech/power_generator_dashboard/blob/main/<%= @file %>

@@ -1,0 +1,38 @@
+<!-- css  -->
+<style>
+  .table-content {
+    margin: 0px 2% 50px 2%;
+    text-align: center;
+  }
+  th , td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .main-container{
+    background-color: whitesmoke;
+  }
+  .table{
+    background-color: white;
+  }
+  #table-list{
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  }
+  .avg{
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .project{
+    font-size: 16px; 
+    font-weight: bold;
+  }
+  .privious-link{
+    color: #565A8E;
+  }
+</style>
+<div id="highGrdae" class="main-container">
+  <%= render 'strength_testings/high_grade_filter' %>
+  <%= turbo_stream.replace "high_grade_table" do %>
+    <%= render 'strength_testings/min_strength_table' %>
+  <% end %>
+</div>
+

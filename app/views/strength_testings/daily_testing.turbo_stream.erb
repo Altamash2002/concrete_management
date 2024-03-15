@@ -1,0 +1,7 @@
+<div class="main-container">
+    <%= render 'strength_testings/testing_filter' %>
+    <%= turbo_stream.replace "daily_testing" do %>
+        <%= render 'strength_testings/testing_table' %>
+    <% end %>
+</div>
+

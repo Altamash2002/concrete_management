@@ -1,0 +1,72 @@
+ 
+<style>
+  .drill-bg{
+    background-color: #115679;
+    border-radius: 10px;
+    height: 120px;
+    vertical-align: center;
+  }
+  .heading-div{
+    text-align: center;
+    background-color: #115679;
+    color: white;
+    padding: 5px 40px;
+  }
+  .comp-heading{
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .center{
+    padding-top: 50px;
+  }
+    .privious-link{
+    color: #565A8E;
+  }
+   .color-text{
+    color: black;
+  }
+  .shadow{
+  box-shadow: 10px 10px 5px lightblue;
+  }
+  .project{
+    font-size: 16px; 
+    font-weight: bold;
+  }
+</style>
+  <div> 
+    <div class=" ">
+      <div class="col-md-4">
+        <div class="row ">
+            <div class="col-md-3 privious-link">
+              <%= link_to "/drildown_strength_testing/project", class: "dropdown-item child row align-items-center container-fluid m-0" do %>
+                <span class="project">PROJECTS ></span>
+              <%end%>
+            </div>
+       </div>
+      </div>
+    </div> 
+    <div class="container-fluid   py-5 d-flex justify-content-center align-items-center">
+      <div class="rounded-3 shadow" style="width:80%; height: 319px; object-fit: cover;background: url(<%= asset_path 'structure1.jpg' %>);background-size: cover;background-position: 9% 100%;">
+        <div class="row align-items-center h-100">
+          <div class="col-md-12">
+            <h2 class="mx-auto text-center bg-white rounded-3 p-3" style="width: fit-content">Buildings</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid"style="width: 80%;">
+      <div class="row p-0 mx-auto mb-5 container-fluid justify-content-center">
+        <% @buildings.each do |building| %>
+          <div class="col-md-4 col-sm-6 py-2">
+                <div class="card shadow">
+                  <div class="card-body d-flex align-items-center" style="padding-top: 25px; padding-bottom: 25px;">
+                    <img src="<%= asset_path 'Building0.svg' %>" alt="Project Image" class="img-fluid me-3" style="max-width: 70px;">
+                    <h5><%= link_to building.name, drildown_strength_testing_grade_path(project_id: params[:project_id], building_id: building.id), class: "text-decoration-none color-text" %></h5>
+                  </div>
+                </div>
+              </div>
+        <% end %>
+      </div> 
+    </div> 
+
+  

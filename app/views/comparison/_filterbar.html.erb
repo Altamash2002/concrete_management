@@ -1,0 +1,146 @@
+<style>
+  @media only screen and (min-width:321px) and (max-width:568px) {
+    .s-label {
+      text-align: center !important;
+    }
+
+    .s-label select {
+
+      width: 100% !important;
+    }
+
+    .input {
+
+      width: 100% !important;
+    }
+
+    .text-m {
+      text-align: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+</style>
+
+<div class="container-fluid p-3 pb-0 text-center col-lg " style="overflow-x: hidden;">
+    <div class="row mx-auto justify-content-center rounded-3 filterBar text-dark text-center pt-3 pb-4" style="background-color: white;" data-controller='filter' data-path="<%= request.path %>">
+        <div class="col-md-4 my-2 row justify-content-start align-items-center">
+          <div class="col-md-3">
+            <input class="form-check-input" type="checkbox" value="" id="date">
+            <label class="form-check-label fw-semibold" for="date">
+              Date
+            </label>
+          </div>
+            <form class="col-md-4" action="">
+              <label class="From" for="from_date">From:</label>
+              <br />
+              <input class="input rounded w-100" type="date" id="from_date" name="from_date" min="2000-01-01" max='<%= Date.current %>'
+              style="padding: 6px; background: whitesmoke; border: none;" data-path='<%= request.path%>' data-action="change->filter#setFilter" >
+            </form>
+
+            <form class="col-md-4" action="">
+              <label class="From" for="to_date">To:</label>
+              <br />
+              <input class="input rounded w-100" type="date" id="to_date" name="to_date" min="" max='<%= Date.current %>'
+                style="padding: 6px; background: whitesmoke; border: none;" data-path='<%= request.path%>' data-action="change->filter#setFilter">
+            </form>
+        </div> 
+
+        <div class="col-lg-4 row mx-auto justify-content-center align-items-center my-4 my-md-0">
+            <div class="col-md-5">
+                <input class="form-check-input" type="checkbox" id="structure">
+                <label class="form-check-label fw-semibold" for="structure">
+                    Structure
+                </label>
+            </div>
+            <div class="s-label col-md-7" id="structure-input">
+                <%= select_tag "structure", options_for_select(@structures), multiple: true, include_blank: true, id: "structure_filters", class: "select2 rounded w-100", data: { path:  request.path , action: "change->filter#setFilter" } %>
+            </div>
+        </div>
+
+        <div class="col-md-4 my-2 row justify-content-center align-items-center">
+          <div class="col-md-5">
+            <input class="form-check-input" type="checkbox" value="" id="concrete1">
+              <label class="form-check-label fw-semibold" for="concrete1">
+                Cement Brand
+              </label>
+          </div>
+          <div class="dropdown s-label col-md-7" id="concrete-input">
+            <%= select_tag "cement", options_for_select(@cement_names) , multiple: true, id: 'cement_filters', include_blank: true , class: "select2 rounded w-100", data: { action: "change->filter#setFilter" , path: request.path } %>
+          </div>
+        </div> 
+        <div class="col-md-4 my-2 row justify-content-center align-items-center">
+          <div class="col-md-5">
+            <input class="form-check-input" type="checkbox" value="" id="concrete1">
+            <label class="form-check-label fw-semibold" for="concrete1">
+              Site Plant
+            </label>
+          </div>
+          <div class="dropdown s-label col-md-7" id="concrete-input">
+            <%= select_tag "cement", options_for_select(@rmcs) , multiple: true, id: 'rmc_filters', include_blank: true , class: "select2 rounded w-100", data: { action: "change->filter#setFilter" , path: request.path } %>
+          </div>
+        </div>   
+        <div class="col-md-4 my-2 row justify-content-center align-items-center">
+          <div class="col-md-5">
+            <input class="form-check-input" type="checkbox" value="" id="concrete1">
+            <label class="form-check-label fw-semibold" for="concrete1">
+              Buildings
+            </label>
+          </div>
+          <div class="dropdown s-label col-md-7" id="concrete-input">
+            <%= select_tag "building", options_for_select(@buildings) , multiple: true, id: 'building_filters', include_blank: true , class: "select2 rounded w-100", data: { action: "change->filter#setFilter" , path: request.path } %>
+          </div>
+        </div> 
+        <div class="col-md-4 my-2 row justify-content-center align-items-center">
+          <div class="col-md-5">
+            <input class="form-check-input" type="checkbox" value="" id="concrete1">
+            <label class="form-check-label fw-semibold" for="concrete1">
+              Cement Content(kg/M3)
+            </label>
+          </div>
+          <div class="dropdown s-label col-md-7" id="concrete-input">
+            <%= select_tag "cement", options_for_select(@cement_dosages) , multiple: true, id: 'cdosage_filters', include_blank: true , class: "select2 rounded w-100", data: { action: "change->filter#setFilter" , path: request.path } %>
+          </div>
+        </div>
+        <div class="col-md-3 my-2 row justify-content-center align-items-center">
+            <div class="col-md-5">
+            <input class="form-check-input" type="checkbox" value="" id="concrete2">
+                <label class="form-check-label fw-semibold" for="concrete2">
+                  Grade
+                </label>
+            </div>
+            <div class="dropdown s-label col-md-7" id="concrete-input">
+                    <%= select_tag "grade", options_for_select(@grades) , multiple: true, id: 'grade_filters', include_blank: true , class: "select2 rounded w-100", data: { action: "change->filter#setFilter" , path: request.path } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const fromInput = document.getElementById('from_date');
+  const toInput = document.getElementById('to_date');
+
+  fromInput.addEventListener('input', function() {
+    toInput.min = fromInput.value;
+    
+    if (toInput.value < fromInput.value) {
+      toInput.value = fromInput.value;
+    }
+  });
+
+  toInput.addEventListener('input', function() {
+    if (!fromInput.value) {
+      alert('Please select the "From" date before selecting the "To" date.');
+      toInput.value = '';
+      return;
+    }
+
+    fromInput.max = toInput.value;
+
+    if (fromInput.value > toInput.value) {
+      fromInput.value = toInput.value;
+    }
+  });
+});
+</script>

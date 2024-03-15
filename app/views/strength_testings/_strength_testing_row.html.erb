@@ -1,0 +1,324 @@
+<tr>
+  <td><input class="form-check-input" type="checkbox" name="selectedRows"></td>
+  <td class="main-tbl-td"><%= st&.project_master&.name %></td>
+  <td class="main-tbl-td"><%= st.id %></td>
+  <td class="main-tbl-td"><%= st&.date&.strftime("%d-%m-%Y") %></td>
+  <td class="main-tbl-td"><%= st&.rmc_list&.name %></td>
+  <td class="main-tbl-td"><%= st.building_master.present? ? st.building_master.name : "NA" %></td>
+  <td class="main-tbl-td"><%= st&.structure_master&.name || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.grade_master&.name || "NA" %></td>
+  <td class="main-tbl-td"><%= st.w_b_ratio || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.location || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.week_no || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.new_density || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.cement&.brand || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.cement_c_c_kg_m3 || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.superplasticizer&.brand || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.s_plasticizer_dosage || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.m_admixture&.brand || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.m_admixture_dosage || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.m_silica&.brand || "NA" %></td>
+  <td class="main-tbl-td"><%= st&.m_silica_dosage || "NA" %></td>
+  <td class="main-tble-td"><%= st&.num_of_cube&.count || "NA" %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '1 days', 0), st&.grade_master&.name, '1 days') %>"><%= get_result_value(st&.testing_results, '1 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '2 days', 0), st&.grade_master&.name, '2 days') %>"><%= get_result_value(st&.testing_results, '2 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '3 days', 0), st&.grade_master&.name, '3 days') %>"><%= get_result_value(st&.testing_results, '3 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '5 days', 0), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '5 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '7 days', 0), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '7 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '10 days', 0), st&.grade_master&.name, '10 days') %>"><%= get_result_value(st&.testing_results, '10 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '14 days', 0), st&.grade_master&.name, '14 days') %>"><%= get_result_value(st&.testing_results, '14 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '15 days', 0), st&.grade_master&.name, '15 days') %>"><%= get_result_value(st&.testing_results, '15 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '28 days', 0), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '28 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, ['35 days','35 Days'], 0), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, ['35 days','35 Days'], 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '45 days', 0), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '45 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, ['56 days','56 Days'], 0), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, ['56 days','56 Days'], 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '90 days', 0), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '90 days', 0) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '120 days', 0), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '120 days', 0) %></td>
+  <td class="main-tbl-td"><%= st&.user&.email %></td>
+  <td class="main-tbl-td" data-strength-testing-id="<%= st.id %>">
+   <% if st.is_verified? %>
+     <span style="color: green; font-weight:bold;"> Verifieds </span>
+    <% else %>
+     <span style="color: red; font-weight:bold;"> Not Verifieds </span>
+    <% end %>
+  </td>
+  <% if  current_user.present? && current_user.ceo? || current_user.site_incharge? || current_user.lab_technician? || current_user.project_incharge?  %>
+  <% elsif current_user.present? && current_user.lab_technician?  %>
+    <td class="main-tbl-td"><button><a href="<%= edit_strength_testing_path(st) %>"><i class="bi bi-pencil-fill"></i></a></button></td>
+  <% else %>
+    <td class="main-tbl-td"><button><a href="<%= edit_strength_testing_path(st) %>"><i class="bi bi-pencil-fill"></i></a></button></td>
+    <td class="main-tbl-td">
+        <%= button_to strength_testing_path(st),
+                        method: :delete,
+                        data: { confirm: 'Are you sure you want to delete this record?' },
+                        form: { 'data-turbo-frame': 'table-list' },
+                        params: { authenticity_token: form_authenticity_token } do %>
+            <i class="bi bi-trash3-fill"></i>
+        <% end %>
+    </td>  
+  <%end %> 
+
+</tr>
+<tr>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '1 days', 1), st&.grade_master&.name, '1 days') %>"><%= get_result_value(st&.testing_results, '1 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '2 days', 1), st&.grade_master&.name, '2 days') %>"><%= get_result_value(st&.testing_results, '2 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '3 days', 1), st&.grade_master&.name, '3 days') %>"><%= get_result_value(st&.testing_results, '3 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '5 days', 1), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '5 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '7 days', 1), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '7 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '10 days', 1), st&.grade_master&.name, '10 days') %>"><%= get_result_value(st&.testing_results, '10 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '14 days', 1), st&.grade_master&.name, '14 days') %>"><%= get_result_value(st&.testing_results, '14 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st.testing_results, '15 days', 1), st&.grade_master&.name, '15 days') %>"><%= get_result_value(st.testing_results, '15 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st.testing_results, '28 days', 1), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st.testing_results, '28 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st.testing_results, ['35 days','35 Days'], 1), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st.testing_results, ['35 days','35 Days'], 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st.testing_results, '45 days', 1), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st.testing_results, '45 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st.testing_results, ['56 days','56 Days'], 1), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st.testing_results, ['56 days','56 Days'], 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st.testing_results, '90 days', 1), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st.testing_results, '90 days', 1) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st.testing_results, '120 days', 1), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st.testing_results, '120 days', 1) %></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+</tr>
+<tr>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '1 days', 2), st&.grade_master&.name, '1 days') %>"><%= get_result_value(st&.testing_results, '1 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '2 days', 2), st&.grade_master&.name, '2 days') %>"><%= get_result_value(st&.testing_results, '2 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '3 days', 2), st&.grade_master&.name, '3 days') %>"><%= get_result_value(st&.testing_results, '3 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '5 days', 2), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '5 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '7 days', 2), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '7 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '10 days', 2), st&.grade_master&.name, '10 days') %>"><%= get_result_value(st&.testing_results, '10 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '14 days', 2), st&.grade_master&.name, '14 days') %>"><%= get_result_value(st&.testing_results, '14 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '15 days', 2), st&.grade_master&.name, '15 days') %>"><%= get_result_value(st&.testing_results, '15 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '28 days', 2), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '28 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, ['35 days','35 Days'], 2), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, ['35 days','35 Days'], 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '45 days', 2), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '45 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, ['56 days','56 Days'], 2), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, ['56 days','56 Days'], 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '90 days', 2), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '90 days', 2) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '120 days', 2), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '120 days', 2) %></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+</tr>
+<tr>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '1 days', 3), st&.grade_master&.name, '1 days') %>"><%= get_result_value(st&.testing_results, '1 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '2 days', 3), st&.grade_master&.name, '2 days') %>"><%= get_result_value(st&.testing_results, '2 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '3 days', 3), st&.grade_master&.name, '3 days') %>"><%= get_result_value(st&.testing_results, '3 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '5 days', 3), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '5 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= fs_calculate_color(get_result_value(st&.testing_results, '7 days', 3), st&.grade_master&.name, st&.structure_master&.name) %>"><%= get_result_value(st&.testing_results, '7 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '10 days', 3), st&.grade_master&.name, '10 days') %>"><%= get_result_value(st&.testing_results, '10 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '14 days', 3), st&.grade_master&.name, '14 days') %>"><%= get_result_value(st&.testing_results, '14 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '15 days', 3), st&.grade_master&.name, '15 days') %>"><%= get_result_value(st&.testing_results, '15 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '28 days', 3), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '28 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, ['35 days','35 Days'], 3), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, ['35 days','35 Days'], 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '45 days', 3), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '45 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, ['56 days','56 Days'], 3), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, ['56 days','56 Days'], 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '90 days', 3), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '90 days', 3) %></td>
+  <td class="main-tbl-td" style="color: <%= calculate_color(get_result_value(st&.testing_results, '120 days', 3), st&.grade_master&.name, '28 days') %>"><%= get_result_value(st&.testing_results, '120 days', 3) %></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+</tr>
+<tr>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(get_result_value(st&.testing_results, '1 days', 0), st&.grade_master&.name, '1 days') %>"><%= get_result_value(st&.testing_results, '1 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '2 days', 0),st&.grade_master&.name, '2 days') %>"><%= calculate_average(st&.testing_results, '2 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '3 days', 0),st&.grade_master&.name, '3 days') %>"><%= calculate_average(st&.testing_results, '3 days', 0) %></td>                    
+  <td class="main-tbl-td avg" style="color: <%= fs_calculate_color(calculate_average(st&.testing_results, '5 days', 0),st&.grade_master&.name, st&.structure_master&.name) %>"><%= calculate_average(st&.testing_results, '5 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= fs_calculate_color(calculate_average(st&.testing_results, '7 days', 0),st&.grade_master&.name, st&.structure_master&.name) %>"><%= calculate_average(st&.testing_results, '7 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '10 days', 0),st&.grade_master&.name, '10 days') %>"><%= calculate_average(st&.testing_results, '10 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '14 days', 0),st&.grade_master&.name, '14 days') %>"><%= calculate_average(st&.testing_results, '14 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '15 days', 0),st&.grade_master&.name, '15 days') %>"><%= calculate_average(st&.testing_results, '15 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '28 days', 0),st&.grade_master&.name, '28 days') %>"><%= calculate_average(st&.testing_results, '28 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, ['35 days','35 Days'], 0),st&.grade_master&.name, '28 days') %>"><%= calculate_average(st&.testing_results, ['35 days','35 Days'], 0) %></td>                    
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '45 days', 0),st&.grade_master&.name, '28 days') %>"><%= calculate_average(st&.testing_results, '45 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, ['56 days','56 Days'], 0),st&.grade_master&.name, '28 days') %>"><%= calculate_average(st&.testing_results, ['56 days','56 Days'], 0) %></td>                     
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '90 days', 0),st&.grade_master&.name, '28 days') %>"><%= calculate_average(st&.testing_results, '90 days', 0) %></td>
+  <td class="main-tbl-td avg" style="color: <%= calculate_color(calculate_average(st&.testing_results, '120 days', 0),st&.grade_master&.name, '28 days') %>"><%= calculate_average(st&.testing_results, '120 days', 0) %></td>
+  <td class="main-tbl-td"></td>
+  <td class="main-tbl-td"></td>
+</tr>
+
+
+<script>
+  // JavaScript code to handle sending emails with selected rows
+  document.getElementById("sendMailButton").addEventListener("click", function() {
+    var selectedRows = document.getElementsByName("selectedRows");
+    // console.log(selectedRows);
+    var emailBody = "";
+    var selectedBuildingName = null; // Initialize the building name as null
+
+    for (var i = 0; i < selectedRows.length ; i++) {
+      if (selectedRows[i].checked) {
+        var row = selectedRows[i].parentNode.parentNode;
+        var project = row.cells[1].innerText;
+        var sr_no = row.cells[2].innerText;
+        var date = row.cells[3].innerText;
+        var rmc = row.cells[4].innerText;
+        var building = row.cells[5].innerText;
+        var structure = row.cells[6].innerText;
+        var grade = row.cells[7].innerText;
+        var wb_ratio = row.cells[8].innerText;
+        var location = row.cells[9].innerText;
+        var week_no = row.cells[10].innerText;
+        var density = row.cells[11].innerText;
+        var cement = row.cells[12].innerText;
+        var c_dosage = row.cells[13].innerText;
+        var plasticizer = row.cells[14].innerText;
+        var p_dosage = row.cells[15].innerText;
+        var admixture = row.cells[16].innerText;
+        var a_dosage = row.cells[17].innerText;
+        var binder3 = row.cells[18].innerText;
+        var b_dosage = row.cells[19].innerText;
+        var cubes = row.cells[20].innerText;
+        var row4 = row.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling;
+        var days1 = row4.cells[21].innerText;
+        var days2 = row4.cells[22].innerText;
+        var days3 = row4.cells[23].innerText;
+        var days5 = row4.cells[24].innerText;
+        var days7 = row4.cells[25].innerText;
+        var days10 = row4.cells[26].innerText;
+        var days14 = row4.cells[27].innerText;
+        var days15 = row4.cells[28].innerText;
+        var days28 = row4.cells[29].innerText;
+        var days35 = row4.cells[30].innerText;
+        var days45 = row4.cells[31].innerText;
+        var days56 = row4.cells[32].innerText;
+        var days90 = row4.cells[33].innerText;
+        var days120 = row4.cells[34].innerText;
+        var created = row.cells[35].innerText;
+
+
+        emailBody += "PROJECT :      " + project + "%0D%0A";
+        emailBody += "SR-NO :   " + sr_no + "%0D%0A";
+        emailBody += "DATE :       " + date + "%0D%0A";
+        emailBody += "RMC/SITE : " + rmc + "%0D%0A";
+        emailBody += "BUILDING :     " + building + "%0D%0A";
+        emailBody += "STRUCTURE :    " + structure + "%0D%0A";
+        emailBody += "GRADE :   " + grade + "%0D%0A";
+        emailBody += "WB RATIO :   " + wb_ratio + "%0D%0A";
+        emailBody += "LOCATION :   " + location + "%0D%0A";
+        emailBody += "WEEK-NO :   " + week_no + "%0D%0A";
+        emailBody += "DENSITY :   " + density + "%0D%0A";
+        emailBody += "CEMENT BRAND :  " + cement + "%0D%0A";
+        emailBody += "CEMENT DOSAGE :  " + c_dosage + "%0D%0A";
+        emailBody += "S-PLASTICIZER BRAND :  " + plasticizer + "%0D%0A";
+        emailBody += "S-PLASTICIZER DOSAGE :  " + p_dosage + "%0D%0A";
+        emailBody += "M-ADMIXTURE BRAND :  " + admixture + "%0D%0A";
+        emailBody += "M-ADMIXTURE DOSAGE :  " + a_dosage + "%0D%0A";
+        emailBody += "BINDER3 BRAND :  " + binder3 + "%0D%0A";
+        emailBody += "BINDER3 DOSAGE :  " + b_dosage + "%0D%0A";
+        emailBody += "NO-OF CUBES :  " + cubes + "%0D%0A";
+        emailBody += "DAY 1 AVERAGE :  " + days1 + "%0D%0A";
+        emailBody += "DAY 2 AVERAGE :  " + days2 + "%0D%0A";
+        emailBody += "DAY 3 AVERAGE :  " + days3 + "%0D%0A";
+        emailBody += "DAY 5 AVERAGE :  " + days5 + "%0D%0A";
+        emailBody += "DAY 7 AVERAGE :  " + days7 + "%0D%0A";
+        emailBody += "DAY 10 AVERAGE :  " + days10 + "%0D%0A";
+        emailBody += "DAY 14 AVERAGE :  " + days14 + "%0D%0A";
+        emailBody += "DAY 15 AVERAGE :  " + days15 + "%0D%0A";
+        emailBody += "DAY 28 AVERAGE :  " + days28 + "%0D%0A";
+        emailBody += "DAY 35 AVERAGE :  " + days35 + "%0D%0A";
+        emailBody += "DAY 45 AVERAGE :  " + days45 + "%0D%0A";
+        emailBody += "DAY 56 AVERAGE :  " + days56 + "%0D%0A";
+        emailBody += "DAY 90 AVERAGE :  " + days90 + "%0D%0A";
+        emailBody += "DAY 120 AVERAGE :  " + days120 + "%0D%0A";
+        emailBody += "CREATED BY :  " + created + "%0D%0A";
+
+        emailBody += "%0D%0A"; // add empty line between rows
+        emailBody += "%0D%0A"; // add empty line between rows
+
+        // Set the selected building name
+        if (selectedBuildingName === null) {
+          selectedBuildingName = sr_no;
+        }
+      }
+      
+    }
+
+    if (selectedBuildingName === null) {
+      alert("Please select at least one row.");
+    } else {
+      var emailSubject = "Concrete strength Record";
+      var emailLink = "mailto:?subject=" + emailSubject + "&body=" + emailBody;
+      window.open(emailLink, '_blank');
+    }
+  });
+</script>
