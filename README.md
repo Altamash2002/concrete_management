@@ -52,7 +52,7 @@ Get the master key from the team and put it in the config folder.
 ./bin/dev
 ```
 
-## Steps to run on Production
+<!-- ## Steps to run on Production
 
 * Login to Server
 
@@ -117,7 +117,7 @@ rails assets:precompile
 
 ```
 rails restart
-```
+``` -->
 
 
 
